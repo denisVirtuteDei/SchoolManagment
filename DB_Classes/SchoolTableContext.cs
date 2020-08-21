@@ -1,14 +1,14 @@
-namespace SchoolTableCursed
+namespace SchoolTableCursed.DB_Classes
 {
     using System;
     using System.Data.Entity;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
 
-    public partial class Model1 : DbContext
+    public partial class SchoolTableContext : DbContext
     {
-        public Model1()
-            : base("name=SubjModelConnect")
+        public SchoolTableContext()
+            : base("name=SchoolTableContext")
         {
         }
 
@@ -16,8 +16,8 @@ namespace SchoolTableCursed
         public virtual DbSet<Groups> Groups { get; set; }
         public virtual DbSet<Student> Student { get; set; }
         public virtual DbSet<Subject> Subject { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Teacher> Teacher { get; set; }
+        public virtual DbSet<Week> Week { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -43,6 +43,12 @@ namespace SchoolTableCursed
                 .HasMany(e => e.Exercise)
                 .WithRequired(e => e.Teacher)
                 .HasForeignKey(e => e.TeacherFK)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Week>()
+                .HasMany(e => e.Exercise)
+                .WithRequired(e => e.Week)
+                .HasForeignKey(e => e.AWeek)
                 .WillCascadeOnDelete(false);
         }
     }

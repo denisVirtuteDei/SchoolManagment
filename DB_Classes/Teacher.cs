@@ -1,4 +1,4 @@
-namespace SchoolTableCursed
+namespace SchoolTableCursed.DB_Classes
 {
     using System;
     using System.Collections.Generic;

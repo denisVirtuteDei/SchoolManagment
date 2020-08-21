@@ -1,4 +1,4 @@
-namespace SchoolTableCursed
+namespace SchoolTableCursed.DB_Classes
 {
     using System;
     using System.Collections.Generic;
@@ -15,11 +15,9 @@ namespace SchoolTableCursed
             Student = new HashSet<Student>();
         }
 
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int GroupID { get; set; }
 
-        [Required]
+        [Key]
         [StringLength(10)]
         public string GroupName { get; set; }
 

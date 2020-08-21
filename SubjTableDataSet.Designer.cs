@@ -34,11 +34,15 @@ namespace SchoolTableCursed {
         
         private TeacherDataTable tableTeacher;
         
+        private WeekDataTable tableWeek;
+        
         private global::System.Data.DataRelation relationFK_Exercise_Groups;
         
         private global::System.Data.DataRelation relationFK_Exercise_Subject;
         
         private global::System.Data.DataRelation relationFK_Exercise_Teacher;
+        
+        private global::System.Data.DataRelation relationFK_Exercise_Week;
         
         private global::System.Data.DataRelation relationFK_Student_Groups;
         
@@ -84,6 +88,9 @@ namespace SchoolTableCursed {
                 }
                 if ((ds.Tables["Teacher"] != null)) {
                     base.Tables.Add(new TeacherDataTable(ds.Tables["Teacher"]));
+                }
+                if ((ds.Tables["Week"] != null)) {
+                    base.Tables.Add(new WeekDataTable(ds.Tables["Week"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -150,6 +157,16 @@ namespace SchoolTableCursed {
         public TeacherDataTable Teacher {
             get {
                 return this.tableTeacher;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public WeekDataTable Week {
+            get {
+                return this.tableWeek;
             }
         }
         
@@ -235,6 +252,9 @@ namespace SchoolTableCursed {
                 if ((ds.Tables["Teacher"] != null)) {
                     base.Tables.Add(new TeacherDataTable(ds.Tables["Teacher"]));
                 }
+                if ((ds.Tables["Week"] != null)) {
+                    base.Tables.Add(new WeekDataTable(ds.Tables["Week"]));
+                }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
                 this.Namespace = ds.Namespace;
@@ -298,9 +318,16 @@ namespace SchoolTableCursed {
                     this.tableTeacher.InitVars();
                 }
             }
+            this.tableWeek = ((WeekDataTable)(base.Tables["Week"]));
+            if ((initTable == true)) {
+                if ((this.tableWeek != null)) {
+                    this.tableWeek.InitVars();
+                }
+            }
             this.relationFK_Exercise_Groups = this.Relations["FK_Exercise_Groups"];
             this.relationFK_Exercise_Subject = this.Relations["FK_Exercise_Subject"];
             this.relationFK_Exercise_Teacher = this.Relations["FK_Exercise_Teacher"];
+            this.relationFK_Exercise_Week = this.Relations["FK_Exercise_Week"];
             this.relationFK_Student_Groups = this.Relations["FK_Student_Groups"];
         }
         
@@ -322,20 +349,26 @@ namespace SchoolTableCursed {
             base.Tables.Add(this.tableSubject);
             this.tableTeacher = new TeacherDataTable();
             base.Tables.Add(this.tableTeacher);
+            this.tableWeek = new WeekDataTable();
+            base.Tables.Add(this.tableWeek);
             this.relationFK_Exercise_Groups = new global::System.Data.DataRelation("FK_Exercise_Groups", new global::System.Data.DataColumn[] {
-                        this.tableGroups.GroupIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableGroups.GroupNameColumn}, new global::System.Data.DataColumn[] {
                         this.tableExercise.GroupFKColumn}, false);
             this.Relations.Add(this.relationFK_Exercise_Groups);
             this.relationFK_Exercise_Subject = new global::System.Data.DataRelation("FK_Exercise_Subject", new global::System.Data.DataColumn[] {
-                        this.tableSubject.SubjIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableSubject.SubjNameColumn}, new global::System.Data.DataColumn[] {
                         this.tableExercise.SubjNameFKColumn}, false);
             this.Relations.Add(this.relationFK_Exercise_Subject);
             this.relationFK_Exercise_Teacher = new global::System.Data.DataRelation("FK_Exercise_Teacher", new global::System.Data.DataColumn[] {
                         this.tableTeacher.LectureIDColumn}, new global::System.Data.DataColumn[] {
                         this.tableExercise.TeacherFKColumn}, false);
             this.Relations.Add(this.relationFK_Exercise_Teacher);
+            this.relationFK_Exercise_Week = new global::System.Data.DataRelation("FK_Exercise_Week", new global::System.Data.DataColumn[] {
+                        this.tableWeek.WeekTypeColumn}, new global::System.Data.DataColumn[] {
+                        this.tableExercise.AWeekColumn}, false);
+            this.Relations.Add(this.relationFK_Exercise_Week);
             this.relationFK_Student_Groups = new global::System.Data.DataRelation("FK_Student_Groups", new global::System.Data.DataColumn[] {
-                        this.tableGroups.GroupIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableGroups.GroupNameColumn}, new global::System.Data.DataColumn[] {
                         this.tableStudent.GroupFKColumn}, false);
             this.Relations.Add(this.relationFK_Student_Groups);
         }
@@ -367,6 +400,12 @@ namespace SchoolTableCursed {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private bool ShouldSerializeTeacher() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        private bool ShouldSerializeWeek() {
             return false;
         }
         
@@ -440,6 +479,9 @@ namespace SchoolTableCursed {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         public delegate void TeacherRowChangeEventHandler(object sender, TeacherRowChangeEvent e);
         
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        public delegate void WeekRowChangeEventHandler(object sender, WeekRowChangeEvent e);
+        
         /// <summary>
         ///Represents the strongly named DataTable class.
         ///</summary>
@@ -462,6 +504,8 @@ namespace SchoolTableCursed {
             private global::System.Data.DataColumn columnGroupFK;
             
             private global::System.Data.DataColumn columnExNumber;
+            
+            private global::System.Data.DataColumn columnDayOfWeek;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
@@ -562,6 +606,14 @@ namespace SchoolTableCursed {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn DayOfWeekColumn {
+                get {
+                    return this.columnDayOfWeek;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -597,25 +649,29 @@ namespace SchoolTableCursed {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public ExerciseRow AddExerciseRow(int ExID, string AWeek, SubjectRow parentSubjectRowByFK_Exercise_Subject, TeacherRow parentTeacherRowByFK_Exercise_Teacher, int Class, string ExKind, GroupsRow parentGroupsRowByFK_Exercise_Groups, int ExNumber) {
+            public ExerciseRow AddExerciseRow(int ExID, WeekRow parentWeekRowByFK_Exercise_Week, SubjectRow parentSubjectRowByFK_Exercise_Subject, TeacherRow parentTeacherRowByFK_Exercise_Teacher, int Class, string ExKind, GroupsRow parentGroupsRowByFK_Exercise_Groups, int ExNumber, System.DateTime DayOfWeek) {
                 ExerciseRow rowExerciseRow = ((ExerciseRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         ExID,
-                        AWeek,
+                        null,
                         null,
                         null,
                         Class,
                         ExKind,
                         null,
-                        ExNumber};
+                        ExNumber,
+                        DayOfWeek};
+                if ((parentWeekRowByFK_Exercise_Week != null)) {
+                    columnValuesArray[1] = parentWeekRowByFK_Exercise_Week[1];
+                }
                 if ((parentSubjectRowByFK_Exercise_Subject != null)) {
-                    columnValuesArray[2] = parentSubjectRowByFK_Exercise_Subject[0];
+                    columnValuesArray[2] = parentSubjectRowByFK_Exercise_Subject[1];
                 }
                 if ((parentTeacherRowByFK_Exercise_Teacher != null)) {
                     columnValuesArray[3] = parentTeacherRowByFK_Exercise_Teacher[0];
                 }
                 if ((parentGroupsRowByFK_Exercise_Groups != null)) {
-                    columnValuesArray[6] = parentGroupsRowByFK_Exercise_Groups[0];
+                    columnValuesArray[6] = parentGroupsRowByFK_Exercise_Groups[1];
                 }
                 rowExerciseRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowExerciseRow);
@@ -654,6 +710,7 @@ namespace SchoolTableCursed {
                 this.columnExKind = base.Columns["ExKind"];
                 this.columnGroupFK = base.Columns["GroupFK"];
                 this.columnExNumber = base.Columns["ExNumber"];
+                this.columnDayOfWeek = base.Columns["DayOfWeek"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -663,7 +720,7 @@ namespace SchoolTableCursed {
                 base.Columns.Add(this.columnExID);
                 this.columnAWeek = new global::System.Data.DataColumn("AWeek", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnAWeek);
-                this.columnSubjNameFK = new global::System.Data.DataColumn("SubjNameFK", typeof(int), null, global::System.Data.MappingType.Element);
+                this.columnSubjNameFK = new global::System.Data.DataColumn("SubjNameFK", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnSubjNameFK);
                 this.columnTeacherFK = new global::System.Data.DataColumn("TeacherFK", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTeacherFK);
@@ -671,10 +728,12 @@ namespace SchoolTableCursed {
                 base.Columns.Add(this.columnClass);
                 this.columnExKind = new global::System.Data.DataColumn("ExKind", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnExKind);
-                this.columnGroupFK = new global::System.Data.DataColumn("GroupFK", typeof(int), null, global::System.Data.MappingType.Element);
+                this.columnGroupFK = new global::System.Data.DataColumn("GroupFK", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnGroupFK);
                 this.columnExNumber = new global::System.Data.DataColumn("ExNumber", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnExNumber);
+                this.columnDayOfWeek = new global::System.Data.DataColumn("DayOfWeek", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDayOfWeek);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnExID}, true));
                 this.columnExID.AllowDBNull = false;
@@ -682,12 +741,15 @@ namespace SchoolTableCursed {
                 this.columnAWeek.AllowDBNull = false;
                 this.columnAWeek.MaxLength = 10;
                 this.columnSubjNameFK.AllowDBNull = false;
+                this.columnSubjNameFK.MaxLength = 50;
                 this.columnTeacherFK.AllowDBNull = false;
                 this.columnClass.AllowDBNull = false;
                 this.columnExKind.AllowDBNull = false;
                 this.columnExKind.MaxLength = 50;
                 this.columnGroupFK.AllowDBNull = false;
+                this.columnGroupFK.MaxLength = 10;
                 this.columnExNumber.AllowDBNull = false;
+                this.columnDayOfWeek.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -923,9 +985,9 @@ namespace SchoolTableCursed {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public GroupsRow FindByGroupID(int GroupID) {
+            public GroupsRow FindByGroupName(string GroupName) {
                 return ((GroupsRow)(this.Rows.Find(new object[] {
-                            GroupID})));
+                            GroupName})));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -957,10 +1019,10 @@ namespace SchoolTableCursed {
                 this.columnGroupName = new global::System.Data.DataColumn("GroupName", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnGroupName);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columnGroupID}, true));
+                                this.columnGroupName}, true));
                 this.columnGroupID.AllowDBNull = false;
-                this.columnGroupID.Unique = true;
                 this.columnGroupName.AllowDBNull = false;
+                this.columnGroupName.Unique = true;
                 this.columnGroupName.MaxLength = 10;
             }
             
@@ -1224,7 +1286,7 @@ namespace SchoolTableCursed {
                         Kurs,
                         null};
                 if ((parentGroupsRowByFK_Student_Groups != null)) {
-                    columnValuesArray[4] = parentGroupsRowByFK_Student_Groups[0];
+                    columnValuesArray[4] = parentGroupsRowByFK_Student_Groups[1];
                 }
                 rowStudentRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowStudentRow);
@@ -1273,7 +1335,7 @@ namespace SchoolTableCursed {
                 base.Columns.Add(this.columnName);
                 this.columnKurs = new global::System.Data.DataColumn("Kurs", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnKurs);
-                this.columnGroupFK = new global::System.Data.DataColumn("GroupFK", typeof(int), null, global::System.Data.MappingType.Element);
+                this.columnGroupFK = new global::System.Data.DataColumn("GroupFK", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnGroupFK);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnStudID}, true));
@@ -1285,6 +1347,7 @@ namespace SchoolTableCursed {
                 this.columnName.MaxLength = 50;
                 this.columnKurs.AllowDBNull = false;
                 this.columnGroupFK.AllowDBNull = false;
+                this.columnGroupFK.MaxLength = 10;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1520,9 +1583,9 @@ namespace SchoolTableCursed {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public SubjectRow FindBySubjID(int SubjID) {
+            public SubjectRow FindBySubjName(string SubjName) {
                 return ((SubjectRow)(this.Rows.Find(new object[] {
-                            SubjID})));
+                            SubjName})));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1554,10 +1617,10 @@ namespace SchoolTableCursed {
                 this.columnSubjName = new global::System.Data.DataColumn("SubjName", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnSubjName);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columnSubjID}, true));
+                                this.columnSubjName}, true));
                 this.columnSubjID.AllowDBNull = false;
-                this.columnSubjID.Unique = true;
                 this.columnSubjName.AllowDBNull = false;
+                this.columnSubjName.Unique = true;
                 this.columnSubjName.MaxLength = 50;
             }
             
@@ -1976,6 +2039,280 @@ namespace SchoolTableCursed {
         }
         
         /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class WeekDataTable : global::System.Data.TypedTableBase<WeekRow> {
+            
+            private global::System.Data.DataColumn columnWeekId;
+            
+            private global::System.Data.DataColumn columnWeekType;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public WeekDataTable() {
+                this.TableName = "Week";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            internal WeekDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected WeekDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn WeekIdColumn {
+                get {
+                    return this.columnWeekId;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn WeekTypeColumn {
+                get {
+                    return this.columnWeekType;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public WeekRow this[int index] {
+                get {
+                    return ((WeekRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event WeekRowChangeEventHandler WeekRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event WeekRowChangeEventHandler WeekRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event WeekRowChangeEventHandler WeekRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event WeekRowChangeEventHandler WeekRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void AddWeekRow(WeekRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public WeekRow AddWeekRow(int WeekId, string WeekType) {
+                WeekRow rowWeekRow = ((WeekRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        WeekId,
+                        WeekType};
+                rowWeekRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowWeekRow);
+                return rowWeekRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public WeekRow FindByWeekType(string WeekType) {
+                return ((WeekRow)(this.Rows.Find(new object[] {
+                            WeekType})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                WeekDataTable cln = ((WeekDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new WeekDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            internal void InitVars() {
+                this.columnWeekId = base.Columns["WeekId"];
+                this.columnWeekType = base.Columns["WeekType"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            private void InitClass() {
+                this.columnWeekId = new global::System.Data.DataColumn("WeekId", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnWeekId);
+                this.columnWeekType = new global::System.Data.DataColumn("WeekType", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnWeekType);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnWeekType}, true));
+                this.columnWeekId.AllowDBNull = false;
+                this.columnWeekType.AllowDBNull = false;
+                this.columnWeekType.Unique = true;
+                this.columnWeekType.MaxLength = 10;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public WeekRow NewWeekRow() {
+                return ((WeekRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new WeekRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(WeekRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.WeekRowChanged != null)) {
+                    this.WeekRowChanged(this, new WeekRowChangeEvent(((WeekRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.WeekRowChanging != null)) {
+                    this.WeekRowChanging(this, new WeekRowChangeEvent(((WeekRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.WeekRowDeleted != null)) {
+                    this.WeekRowDeleted(this, new WeekRowChangeEvent(((WeekRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.WeekRowDeleting != null)) {
+                    this.WeekRowDeleting(this, new WeekRowChangeEvent(((WeekRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void RemoveWeekRow(WeekRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                SubjTableDataSet ds = new SubjTableDataSet();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "WeekDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
         public partial class ExerciseRow : global::System.Data.DataRow {
@@ -2013,9 +2350,9 @@ namespace SchoolTableCursed {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public int SubjNameFK {
+            public string SubjNameFK {
                 get {
-                    return ((int)(this[this.tableExercise.SubjNameFKColumn]));
+                    return ((string)(this[this.tableExercise.SubjNameFKColumn]));
                 }
                 set {
                     this[this.tableExercise.SubjNameFKColumn] = value;
@@ -2057,9 +2394,9 @@ namespace SchoolTableCursed {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public int GroupFK {
+            public string GroupFK {
                 get {
-                    return ((int)(this[this.tableExercise.GroupFKColumn]));
+                    return ((string)(this[this.tableExercise.GroupFKColumn]));
                 }
                 set {
                     this[this.tableExercise.GroupFKColumn] = value;
@@ -2074,6 +2411,17 @@ namespace SchoolTableCursed {
                 }
                 set {
                     this[this.tableExercise.ExNumberColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public System.DateTime DayOfWeek {
+                get {
+                    return ((global::System.DateTime)(this[this.tableExercise.DayOfWeekColumn]));
+                }
+                set {
+                    this[this.tableExercise.DayOfWeekColumn] = value;
                 }
             }
             
@@ -2107,6 +2455,17 @@ namespace SchoolTableCursed {
                 }
                 set {
                     this.SetParentRow(value, this.Table.ParentRelations["FK_Exercise_Teacher"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public WeekRow WeekRow {
+                get {
+                    return ((WeekRow)(this.GetParentRow(this.Table.ParentRelations["FK_Exercise_Week"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_Exercise_Week"]);
                 }
             }
         }
@@ -2230,9 +2589,9 @@ namespace SchoolTableCursed {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public int GroupFK {
+            public string GroupFK {
                 get {
-                    return ((int)(this[this.tableStudent.GroupFKColumn]));
+                    return ((string)(this[this.tableStudent.GroupFKColumn]));
                 }
                 set {
                     this[this.tableStudent.GroupFKColumn] = value;
@@ -2354,6 +2713,54 @@ namespace SchoolTableCursed {
                 }
                 else {
                     return ((ExerciseRow[])(base.GetChildRows(this.Table.ChildRelations["FK_Exercise_Teacher"])));
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class WeekRow : global::System.Data.DataRow {
+            
+            private WeekDataTable tableWeek;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            internal WeekRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableWeek = ((WeekDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public int WeekId {
+                get {
+                    return ((int)(this[this.tableWeek.WeekIdColumn]));
+                }
+                set {
+                    this[this.tableWeek.WeekIdColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string WeekType {
+                get {
+                    return ((string)(this[this.tableWeek.WeekTypeColumn]));
+                }
+                set {
+                    this[this.tableWeek.WeekTypeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public ExerciseRow[] GetExerciseRows() {
+                if ((this.Table.ChildRelations["FK_Exercise_Week"] == null)) {
+                    return new ExerciseRow[0];
+                }
+                else {
+                    return ((ExerciseRow[])(base.GetChildRows(this.Table.ChildRelations["FK_Exercise_Week"])));
                 }
             }
         }
@@ -2527,6 +2934,40 @@ namespace SchoolTableCursed {
                 }
             }
         }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        public class WeekRowChangeEvent : global::System.EventArgs {
+            
+            private WeekRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public WeekRowChangeEvent(WeekRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public WeekRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
     }
 }
 namespace SchoolTableCursed.SubjTableDataSetTableAdapters {
@@ -2661,53 +3102,58 @@ namespace SchoolTableCursed.SubjTableDataSetTableAdapters {
             tableMapping.ColumnMappings.Add("ExKind", "ExKind");
             tableMapping.ColumnMappings.Add("GroupFK", "GroupFK");
             tableMapping.ColumnMappings.Add("ExNumber", "ExNumber");
+            tableMapping.ColumnMappings.Add("DayOfWeek", "DayOfWeek");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[Exercise] WHERE (([ExID] = @Original_ExID) AND ([AWeek] = @Original_AWeek) AND ([SubjNameFK] = @Original_SubjNameFK) AND ([TeacherFK] = @Original_TeacherFK) AND ([Class] = @Original_Class) AND ([ExKind] = @Original_ExKind) AND ([GroupFK] = @Original_GroupFK) AND ([ExNumber] = @Original_ExNumber))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[Exercise] WHERE (([ExID] = @Original_ExID) AND ([AWeek] = @Original_AWeek) AND ([SubjNameFK] = @Original_SubjNameFK) AND ([TeacherFK] = @Original_TeacherFK) AND ([Class] = @Original_Class) AND ([ExKind] = @Original_ExKind) AND ([GroupFK] = @Original_GroupFK) AND ([ExNumber] = @Original_ExNumber) AND ([DayOfWeek] = @Original_DayOfWeek))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ExID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ExID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_AWeek", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "AWeek", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SubjNameFK", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SubjNameFK", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SubjNameFK", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SubjNameFK", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TeacherFK", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TeacherFK", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Class", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Class", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ExKind", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ExKind", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_GroupFK", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "GroupFK", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_GroupFK", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "GroupFK", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ExNumber", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ExNumber", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DayOfWeek", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DayOfWeek", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[Exercise] ([ExID], [AWeek], [SubjNameFK], [TeacherFK], [Class], [ExKind], [GroupFK], [ExNumber]) VALUES (@ExID, @AWeek, @SubjNameFK, @TeacherFK, @Class, @ExKind, @GroupFK, @ExNumber);
-SELECT ExID, AWeek, SubjNameFK, TeacherFK, Class, ExKind, GroupFK, ExNumber FROM Exercise WHERE (ExID = @ExID)";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[Exercise] ([ExID], [AWeek], [SubjNameFK], [TeacherFK], [Class], [ExKind], [GroupFK], [ExNumber], [DayOfWeek]) VALUES (@ExID, @AWeek, @SubjNameFK, @TeacherFK, @Class, @ExKind, @GroupFK, @ExNumber, @DayOfWeek);
+SELECT ExID, AWeek, SubjNameFK, TeacherFK, Class, ExKind, GroupFK, ExNumber, DayOfWeek FROM Exercise WHERE (ExID = @ExID)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ExID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ExID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@AWeek", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "AWeek", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SubjNameFK", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SubjNameFK", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SubjNameFK", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SubjNameFK", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TeacherFK", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TeacherFK", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Class", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Class", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ExKind", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ExKind", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@GroupFK", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "GroupFK", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@GroupFK", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "GroupFK", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ExNumber", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ExNumber", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DayOfWeek", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DayOfWeek", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[Exercise] SET [ExID] = @ExID, [AWeek] = @AWeek, [SubjNameFK] = @SubjNameFK, [TeacherFK] = @TeacherFK, [Class] = @Class, [ExKind] = @ExKind, [GroupFK] = @GroupFK, [ExNumber] = @ExNumber WHERE (([ExID] = @Original_ExID) AND ([AWeek] = @Original_AWeek) AND ([SubjNameFK] = @Original_SubjNameFK) AND ([TeacherFK] = @Original_TeacherFK) AND ([Class] = @Original_Class) AND ([ExKind] = @Original_ExKind) AND ([GroupFK] = @Original_GroupFK) AND ([ExNumber] = @Original_ExNumber));
-SELECT ExID, AWeek, SubjNameFK, TeacherFK, Class, ExKind, GroupFK, ExNumber FROM Exercise WHERE (ExID = @ExID)";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[Exercise] SET [ExID] = @ExID, [AWeek] = @AWeek, [SubjNameFK] = @SubjNameFK, [TeacherFK] = @TeacherFK, [Class] = @Class, [ExKind] = @ExKind, [GroupFK] = @GroupFK, [ExNumber] = @ExNumber, [DayOfWeek] = @DayOfWeek WHERE (([ExID] = @Original_ExID) AND ([AWeek] = @Original_AWeek) AND ([SubjNameFK] = @Original_SubjNameFK) AND ([TeacherFK] = @Original_TeacherFK) AND ([Class] = @Original_Class) AND ([ExKind] = @Original_ExKind) AND ([GroupFK] = @Original_GroupFK) AND ([ExNumber] = @Original_ExNumber) AND ([DayOfWeek] = @Original_DayOfWeek));
+SELECT ExID, AWeek, SubjNameFK, TeacherFK, Class, ExKind, GroupFK, ExNumber, DayOfWeek FROM Exercise WHERE (ExID = @ExID)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ExID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ExID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@AWeek", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "AWeek", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SubjNameFK", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SubjNameFK", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SubjNameFK", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SubjNameFK", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TeacherFK", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TeacherFK", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Class", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Class", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ExKind", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ExKind", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@GroupFK", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "GroupFK", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@GroupFK", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "GroupFK", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ExNumber", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ExNumber", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DayOfWeek", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DayOfWeek", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ExID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ExID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_AWeek", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "AWeek", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SubjNameFK", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SubjNameFK", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SubjNameFK", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SubjNameFK", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TeacherFK", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TeacherFK", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Class", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Class", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ExKind", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ExKind", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_GroupFK", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "GroupFK", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_GroupFK", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "GroupFK", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ExNumber", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ExNumber", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DayOfWeek", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DayOfWeek", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2723,8 +3169,8 @@ SELECT ExID, AWeek, SubjNameFK, TeacherFK, Class, ExKind, GroupFK, ExNumber FROM
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT ExID, AWeek, SubjNameFK, TeacherFK, Class, ExKind, GroupFK, ExNumber FROM " +
-                "dbo.Exercise";
+            this._commandCollection[0].CommandText = "SELECT ExID, AWeek, SubjNameFK, TeacherFK, Class, ExKind, GroupFK, ExNumber, DayO" +
+                "fWeek FROM dbo.Exercise";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -2785,7 +3231,7 @@ SELECT ExID, AWeek, SubjNameFK, TeacherFK, Class, ExKind, GroupFK, ExNumber FROM
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_ExID, string Original_AWeek, int Original_SubjNameFK, int Original_TeacherFK, int Original_Class, string Original_ExKind, int Original_GroupFK, int Original_ExNumber) {
+        public virtual int Delete(int Original_ExID, string Original_AWeek, string Original_SubjNameFK, int Original_TeacherFK, int Original_Class, string Original_ExKind, string Original_GroupFK, int Original_ExNumber, System.DateTime Original_DayOfWeek) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_ExID));
             if ((Original_AWeek == null)) {
                 throw new global::System.ArgumentNullException("Original_AWeek");
@@ -2793,7 +3239,12 @@ SELECT ExID, AWeek, SubjNameFK, TeacherFK, Class, ExKind, GroupFK, ExNumber FROM
             else {
                 this.Adapter.DeleteCommand.Parameters[1].Value = ((string)(Original_AWeek));
             }
-            this.Adapter.DeleteCommand.Parameters[2].Value = ((int)(Original_SubjNameFK));
+            if ((Original_SubjNameFK == null)) {
+                throw new global::System.ArgumentNullException("Original_SubjNameFK");
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[2].Value = ((string)(Original_SubjNameFK));
+            }
             this.Adapter.DeleteCommand.Parameters[3].Value = ((int)(Original_TeacherFK));
             this.Adapter.DeleteCommand.Parameters[4].Value = ((int)(Original_Class));
             if ((Original_ExKind == null)) {
@@ -2802,8 +3253,14 @@ SELECT ExID, AWeek, SubjNameFK, TeacherFK, Class, ExKind, GroupFK, ExNumber FROM
             else {
                 this.Adapter.DeleteCommand.Parameters[5].Value = ((string)(Original_ExKind));
             }
-            this.Adapter.DeleteCommand.Parameters[6].Value = ((int)(Original_GroupFK));
+            if ((Original_GroupFK == null)) {
+                throw new global::System.ArgumentNullException("Original_GroupFK");
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[6].Value = ((string)(Original_GroupFK));
+            }
             this.Adapter.DeleteCommand.Parameters[7].Value = ((int)(Original_ExNumber));
+            this.Adapter.DeleteCommand.Parameters[8].Value = ((System.DateTime)(Original_DayOfWeek));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -2824,7 +3281,7 @@ SELECT ExID, AWeek, SubjNameFK, TeacherFK, Class, ExKind, GroupFK, ExNumber FROM
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(int ExID, string AWeek, int SubjNameFK, int TeacherFK, int Class, string ExKind, int GroupFK, int ExNumber) {
+        public virtual int Insert(int ExID, string AWeek, string SubjNameFK, int TeacherFK, int Class, string ExKind, string GroupFK, int ExNumber, System.DateTime DayOfWeek) {
             this.Adapter.InsertCommand.Parameters[0].Value = ((int)(ExID));
             if ((AWeek == null)) {
                 throw new global::System.ArgumentNullException("AWeek");
@@ -2832,7 +3289,12 @@ SELECT ExID, AWeek, SubjNameFK, TeacherFK, Class, ExKind, GroupFK, ExNumber FROM
             else {
                 this.Adapter.InsertCommand.Parameters[1].Value = ((string)(AWeek));
             }
-            this.Adapter.InsertCommand.Parameters[2].Value = ((int)(SubjNameFK));
+            if ((SubjNameFK == null)) {
+                throw new global::System.ArgumentNullException("SubjNameFK");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(SubjNameFK));
+            }
             this.Adapter.InsertCommand.Parameters[3].Value = ((int)(TeacherFK));
             this.Adapter.InsertCommand.Parameters[4].Value = ((int)(Class));
             if ((ExKind == null)) {
@@ -2841,8 +3303,14 @@ SELECT ExID, AWeek, SubjNameFK, TeacherFK, Class, ExKind, GroupFK, ExNumber FROM
             else {
                 this.Adapter.InsertCommand.Parameters[5].Value = ((string)(ExKind));
             }
-            this.Adapter.InsertCommand.Parameters[6].Value = ((int)(GroupFK));
+            if ((GroupFK == null)) {
+                throw new global::System.ArgumentNullException("GroupFK");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[6].Value = ((string)(GroupFK));
+            }
             this.Adapter.InsertCommand.Parameters[7].Value = ((int)(ExNumber));
+            this.Adapter.InsertCommand.Parameters[8].Value = ((System.DateTime)(DayOfWeek));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -2866,20 +3334,22 @@ SELECT ExID, AWeek, SubjNameFK, TeacherFK, Class, ExKind, GroupFK, ExNumber FROM
         public virtual int Update(
                     int ExID, 
                     string AWeek, 
-                    int SubjNameFK, 
+                    string SubjNameFK, 
                     int TeacherFK, 
                     int Class, 
                     string ExKind, 
-                    int GroupFK, 
+                    string GroupFK, 
                     int ExNumber, 
+                    System.DateTime DayOfWeek, 
                     int Original_ExID, 
                     string Original_AWeek, 
-                    int Original_SubjNameFK, 
+                    string Original_SubjNameFK, 
                     int Original_TeacherFK, 
                     int Original_Class, 
                     string Original_ExKind, 
-                    int Original_GroupFK, 
-                    int Original_ExNumber) {
+                    string Original_GroupFK, 
+                    int Original_ExNumber, 
+                    System.DateTime Original_DayOfWeek) {
             this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(ExID));
             if ((AWeek == null)) {
                 throw new global::System.ArgumentNullException("AWeek");
@@ -2887,7 +3357,12 @@ SELECT ExID, AWeek, SubjNameFK, TeacherFK, Class, ExKind, GroupFK, ExNumber FROM
             else {
                 this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(AWeek));
             }
-            this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(SubjNameFK));
+            if ((SubjNameFK == null)) {
+                throw new global::System.ArgumentNullException("SubjNameFK");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(SubjNameFK));
+            }
             this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(TeacherFK));
             this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(Class));
             if ((ExKind == null)) {
@@ -2896,26 +3371,43 @@ SELECT ExID, AWeek, SubjNameFK, TeacherFK, Class, ExKind, GroupFK, ExNumber FROM
             else {
                 this.Adapter.UpdateCommand.Parameters[5].Value = ((string)(ExKind));
             }
-            this.Adapter.UpdateCommand.Parameters[6].Value = ((int)(GroupFK));
+            if ((GroupFK == null)) {
+                throw new global::System.ArgumentNullException("GroupFK");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((string)(GroupFK));
+            }
             this.Adapter.UpdateCommand.Parameters[7].Value = ((int)(ExNumber));
-            this.Adapter.UpdateCommand.Parameters[8].Value = ((int)(Original_ExID));
+            this.Adapter.UpdateCommand.Parameters[8].Value = ((System.DateTime)(DayOfWeek));
+            this.Adapter.UpdateCommand.Parameters[9].Value = ((int)(Original_ExID));
             if ((Original_AWeek == null)) {
                 throw new global::System.ArgumentNullException("Original_AWeek");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((string)(Original_AWeek));
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((string)(Original_AWeek));
             }
-            this.Adapter.UpdateCommand.Parameters[10].Value = ((int)(Original_SubjNameFK));
-            this.Adapter.UpdateCommand.Parameters[11].Value = ((int)(Original_TeacherFK));
-            this.Adapter.UpdateCommand.Parameters[12].Value = ((int)(Original_Class));
+            if ((Original_SubjNameFK == null)) {
+                throw new global::System.ArgumentNullException("Original_SubjNameFK");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((string)(Original_SubjNameFK));
+            }
+            this.Adapter.UpdateCommand.Parameters[12].Value = ((int)(Original_TeacherFK));
+            this.Adapter.UpdateCommand.Parameters[13].Value = ((int)(Original_Class));
             if ((Original_ExKind == null)) {
                 throw new global::System.ArgumentNullException("Original_ExKind");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[13].Value = ((string)(Original_ExKind));
+                this.Adapter.UpdateCommand.Parameters[14].Value = ((string)(Original_ExKind));
             }
-            this.Adapter.UpdateCommand.Parameters[14].Value = ((int)(Original_GroupFK));
-            this.Adapter.UpdateCommand.Parameters[15].Value = ((int)(Original_ExNumber));
+            if ((Original_GroupFK == null)) {
+                throw new global::System.ArgumentNullException("Original_GroupFK");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[15].Value = ((string)(Original_GroupFK));
+            }
+            this.Adapter.UpdateCommand.Parameters[16].Value = ((int)(Original_ExNumber));
+            this.Adapter.UpdateCommand.Parameters[17].Value = ((System.DateTime)(Original_DayOfWeek));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -2936,8 +3428,25 @@ SELECT ExID, AWeek, SubjNameFK, TeacherFK, Class, ExKind, GroupFK, ExNumber FROM
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string AWeek, int SubjNameFK, int TeacherFK, int Class, string ExKind, int GroupFK, int ExNumber, int Original_ExID, string Original_AWeek, int Original_SubjNameFK, int Original_TeacherFK, int Original_Class, string Original_ExKind, int Original_GroupFK, int Original_ExNumber) {
-            return this.Update(Original_ExID, AWeek, SubjNameFK, TeacherFK, Class, ExKind, GroupFK, ExNumber, Original_ExID, Original_AWeek, Original_SubjNameFK, Original_TeacherFK, Original_Class, Original_ExKind, Original_GroupFK, Original_ExNumber);
+        public virtual int Update(
+                    string AWeek, 
+                    string SubjNameFK, 
+                    int TeacherFK, 
+                    int Class, 
+                    string ExKind, 
+                    string GroupFK, 
+                    int ExNumber, 
+                    System.DateTime DayOfWeek, 
+                    int Original_ExID, 
+                    string Original_AWeek, 
+                    string Original_SubjNameFK, 
+                    int Original_TeacherFK, 
+                    int Original_Class, 
+                    string Original_ExKind, 
+                    string Original_GroupFK, 
+                    int Original_ExNumber, 
+                    System.DateTime Original_DayOfWeek) {
+            return this.Update(Original_ExID, AWeek, SubjNameFK, TeacherFK, Class, ExKind, GroupFK, ExNumber, DayOfWeek, Original_ExID, Original_AWeek, Original_SubjNameFK, Original_TeacherFK, Original_Class, Original_ExKind, Original_GroupFK, Original_ExNumber, Original_DayOfWeek);
         }
     }
     
@@ -3075,7 +3584,7 @@ SELECT ExID, AWeek, SubjNameFK, TeacherFK, Class, ExKind, GroupFK, ExNumber FROM
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
             this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[Groups] ([GroupID], [GroupName]) VALUES (@GroupID, @GroupName)" +
-                ";\r\nSELECT GroupID, GroupName FROM Groups WHERE (GroupID = @GroupID)";
+                ";\r\nSELECT GroupID, GroupName FROM Groups WHERE (GroupName = @GroupName)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@GroupID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "GroupID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@GroupName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "GroupName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -3083,7 +3592,7 @@ SELECT ExID, AWeek, SubjNameFK, TeacherFK, Class, ExKind, GroupFK, ExNumber FROM
             this._adapter.UpdateCommand.Connection = this.Connection;
             this._adapter.UpdateCommand.CommandText = "UPDATE [dbo].[Groups] SET [GroupID] = @GroupID, [GroupName] = @GroupName WHERE ((" +
                 "[GroupID] = @Original_GroupID) AND ([GroupName] = @Original_GroupName));\r\nSELECT" +
-                " GroupID, GroupName FROM Groups WHERE (GroupID = @GroupID)";
+                " GroupID, GroupName FROM Groups WHERE (GroupName = @GroupName)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@GroupID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "GroupID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@GroupName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "GroupName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -3256,8 +3765,8 @@ SELECT ExID, AWeek, SubjNameFK, TeacherFK, Class, ExKind, GroupFK, ExNumber FROM
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string GroupName, int Original_GroupID, string Original_GroupName) {
-            return this.Update(Original_GroupID, GroupName, Original_GroupID, Original_GroupName);
+        public virtual int Update(int GroupID, int Original_GroupID, string Original_GroupName) {
+            return this.Update(GroupID, Original_GroupName, Original_GroupID, Original_GroupName);
         }
     }
     
@@ -3398,7 +3907,7 @@ SELECT ExID, AWeek, SubjNameFK, TeacherFK, Class, ExKind, GroupFK, ExNumber FROM
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Surname", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Surname", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Name", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Name", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Kurs", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Kurs", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_GroupFK", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "GroupFK", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_GroupFK", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "GroupFK", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
             this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[Student] ([StudID], [Surname], [Name], [Kurs], [GroupFK]) VALU" +
@@ -3409,7 +3918,7 @@ SELECT ExID, AWeek, SubjNameFK, TeacherFK, Class, ExKind, GroupFK, ExNumber FROM
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Surname", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Surname", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Name", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Kurs", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Kurs", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@GroupFK", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "GroupFK", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@GroupFK", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "GroupFK", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
             this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[Student] SET [StudID] = @StudID, [Surname] = @Surname, [Name] = @Name, [Kurs] = @Kurs, [GroupFK] = @GroupFK WHERE (([StudID] = @Original_StudID) AND ([Surname] = @Original_Surname) AND ([Name] = @Original_Name) AND ([Kurs] = @Original_Kurs) AND ([GroupFK] = @Original_GroupFK));
@@ -3419,12 +3928,12 @@ SELECT StudID, Surname, Name, Kurs, GroupFK FROM Student WHERE (StudID = @StudID
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Surname", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Surname", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Name", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Kurs", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Kurs", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@GroupFK", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "GroupFK", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@GroupFK", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "GroupFK", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_StudID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "StudID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Surname", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Surname", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Name", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Name", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Kurs", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Kurs", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_GroupFK", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "GroupFK", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_GroupFK", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "GroupFK", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3501,7 +4010,7 @@ SELECT StudID, Surname, Name, Kurs, GroupFK FROM Student WHERE (StudID = @StudID
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_StudID, string Original_Surname, string Original_Name, int Original_Kurs, int Original_GroupFK) {
+        public virtual int Delete(int Original_StudID, string Original_Surname, string Original_Name, int Original_Kurs, string Original_GroupFK) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_StudID));
             if ((Original_Surname == null)) {
                 throw new global::System.ArgumentNullException("Original_Surname");
@@ -3516,7 +4025,12 @@ SELECT StudID, Surname, Name, Kurs, GroupFK FROM Student WHERE (StudID = @StudID
                 this.Adapter.DeleteCommand.Parameters[2].Value = ((string)(Original_Name));
             }
             this.Adapter.DeleteCommand.Parameters[3].Value = ((int)(Original_Kurs));
-            this.Adapter.DeleteCommand.Parameters[4].Value = ((int)(Original_GroupFK));
+            if ((Original_GroupFK == null)) {
+                throw new global::System.ArgumentNullException("Original_GroupFK");
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((string)(Original_GroupFK));
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -3537,7 +4051,7 @@ SELECT StudID, Surname, Name, Kurs, GroupFK FROM Student WHERE (StudID = @StudID
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(int StudID, string Surname, string Name, int Kurs, int GroupFK) {
+        public virtual int Insert(int StudID, string Surname, string Name, int Kurs, string GroupFK) {
             this.Adapter.InsertCommand.Parameters[0].Value = ((int)(StudID));
             if ((Surname == null)) {
                 throw new global::System.ArgumentNullException("Surname");
@@ -3552,7 +4066,12 @@ SELECT StudID, Surname, Name, Kurs, GroupFK FROM Student WHERE (StudID = @StudID
                 this.Adapter.InsertCommand.Parameters[2].Value = ((string)(Name));
             }
             this.Adapter.InsertCommand.Parameters[3].Value = ((int)(Kurs));
-            this.Adapter.InsertCommand.Parameters[4].Value = ((int)(GroupFK));
+            if ((GroupFK == null)) {
+                throw new global::System.ArgumentNullException("GroupFK");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[4].Value = ((string)(GroupFK));
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -3573,7 +4092,7 @@ SELECT StudID, Surname, Name, Kurs, GroupFK FROM Student WHERE (StudID = @StudID
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(int StudID, string Surname, string Name, int Kurs, int GroupFK, int Original_StudID, string Original_Surname, string Original_Name, int Original_Kurs, int Original_GroupFK) {
+        public virtual int Update(int StudID, string Surname, string Name, int Kurs, string GroupFK, int Original_StudID, string Original_Surname, string Original_Name, int Original_Kurs, string Original_GroupFK) {
             this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(StudID));
             if ((Surname == null)) {
                 throw new global::System.ArgumentNullException("Surname");
@@ -3588,7 +4107,12 @@ SELECT StudID, Surname, Name, Kurs, GroupFK FROM Student WHERE (StudID = @StudID
                 this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(Name));
             }
             this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(Kurs));
-            this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(GroupFK));
+            if ((GroupFK == null)) {
+                throw new global::System.ArgumentNullException("GroupFK");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[4].Value = ((string)(GroupFK));
+            }
             this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(Original_StudID));
             if ((Original_Surname == null)) {
                 throw new global::System.ArgumentNullException("Original_Surname");
@@ -3603,7 +4127,12 @@ SELECT StudID, Surname, Name, Kurs, GroupFK FROM Student WHERE (StudID = @StudID
                 this.Adapter.UpdateCommand.Parameters[7].Value = ((string)(Original_Name));
             }
             this.Adapter.UpdateCommand.Parameters[8].Value = ((int)(Original_Kurs));
-            this.Adapter.UpdateCommand.Parameters[9].Value = ((int)(Original_GroupFK));
+            if ((Original_GroupFK == null)) {
+                throw new global::System.ArgumentNullException("Original_GroupFK");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((string)(Original_GroupFK));
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -3624,7 +4153,7 @@ SELECT StudID, Surname, Name, Kurs, GroupFK FROM Student WHERE (StudID = @StudID
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string Surname, string Name, int Kurs, int GroupFK, int Original_StudID, string Original_Surname, string Original_Name, int Original_Kurs, int Original_GroupFK) {
+        public virtual int Update(string Surname, string Name, int Kurs, string GroupFK, int Original_StudID, string Original_Surname, string Original_Name, int Original_Kurs, string Original_GroupFK) {
             return this.Update(Original_StudID, Surname, Name, Kurs, GroupFK, Original_StudID, Original_Surname, Original_Name, Original_Kurs, Original_GroupFK);
         }
     }
@@ -3763,7 +4292,7 @@ SELECT StudID, Surname, Name, Kurs, GroupFK FROM Student WHERE (StudID = @StudID
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
             this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[Subject] ([SubjID], [SubjName]) VALUES (@SubjID, @SubjName);\r\n" +
-                "SELECT SubjID, SubjName FROM Subject WHERE (SubjID = @SubjID)";
+                "SELECT SubjID, SubjName FROM Subject WHERE (SubjName = @SubjName)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SubjID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SubjID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SubjName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SubjName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -3771,7 +4300,7 @@ SELECT StudID, Surname, Name, Kurs, GroupFK FROM Student WHERE (StudID = @StudID
             this._adapter.UpdateCommand.Connection = this.Connection;
             this._adapter.UpdateCommand.CommandText = "UPDATE [dbo].[Subject] SET [SubjID] = @SubjID, [SubjName] = @SubjName WHERE (([Su" +
                 "bjID] = @Original_SubjID) AND ([SubjName] = @Original_SubjName));\r\nSELECT SubjID" +
-                ", SubjName FROM Subject WHERE (SubjID = @SubjID)";
+                ", SubjName FROM Subject WHERE (SubjName = @SubjName)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SubjID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SubjID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SubjName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SubjName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -3944,8 +4473,8 @@ SELECT StudID, Surname, Name, Kurs, GroupFK FROM Student WHERE (StudID = @StudID
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string SubjName, int Original_SubjID, string Original_SubjName) {
-            return this.Update(Original_SubjID, SubjName, Original_SubjID, Original_SubjName);
+        public virtual int Update(int SubjID, int Original_SubjID, string Original_SubjName) {
+            return this.Update(SubjID, Original_SubjName, Original_SubjID, Original_SubjName);
         }
     }
     
@@ -4299,6 +4828,326 @@ SELECT LectureID, Surname, Name FROM Teacher WHERE (LectureID = @LectureID)";
     }
     
     /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class WeekTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        public WeekTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "Week";
+            tableMapping.ColumnMappings.Add("WeekId", "WeekId");
+            tableMapping.ColumnMappings.Add("WeekType", "WeekType");
+            this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.DeleteCommand.Connection = this.Connection;
+            this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[Week] WHERE (([WeekId] = @Original_WeekId) AND ([WeekType] = @" +
+                "Original_WeekType))";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_WeekId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "WeekId", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_WeekType", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "WeekType", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[Week] ([WeekId], [WeekType]) VALUES (@WeekId, @WeekType);\r\nSEL" +
+                "ECT WeekId, WeekType FROM Week WHERE (WeekType = @WeekType)";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@WeekId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "WeekId", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@WeekType", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "WeekType", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.UpdateCommand.Connection = this.Connection;
+            this._adapter.UpdateCommand.CommandText = "UPDATE [dbo].[Week] SET [WeekId] = @WeekId, [WeekType] = @WeekType WHERE (([WeekI" +
+                "d] = @Original_WeekId) AND ([WeekType] = @Original_WeekType));\r\nSELECT WeekId, W" +
+                "eekType FROM Week WHERE (WeekType = @WeekType)";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@WeekId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "WeekId", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@WeekType", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "WeekType", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_WeekId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "WeekId", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_WeekType", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "WeekType", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::SchoolTableCursed.Properties.Settings.Default.SubjTableConnectionString;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "SELECT WeekId, WeekType FROM dbo.Week";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(SubjTableDataSet.WeekDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual SubjTableDataSet.WeekDataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            SubjTableDataSet.WeekDataTable dataTable = new SubjTableDataSet.WeekDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(SubjTableDataSet.WeekDataTable dataTable) {
+            return this.Adapter.Update(dataTable);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(SubjTableDataSet dataSet) {
+            return this.Adapter.Update(dataSet, "Week");
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow dataRow) {
+            return this.Adapter.Update(new global::System.Data.DataRow[] {
+                        dataRow});
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow[] dataRows) {
+            return this.Adapter.Update(dataRows);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
+        public virtual int Delete(int Original_WeekId, string Original_WeekType) {
+            this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_WeekId));
+            if ((Original_WeekType == null)) {
+                throw new global::System.ArgumentNullException("Original_WeekType");
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[1].Value = ((string)(Original_WeekType));
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
+            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.DeleteCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.DeleteCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(int WeekId, string WeekType) {
+            this.Adapter.InsertCommand.Parameters[0].Value = ((int)(WeekId));
+            if ((WeekType == null)) {
+                throw new global::System.ArgumentNullException("WeekType");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(WeekType));
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(int WeekId, string WeekType, int Original_WeekId, string Original_WeekType) {
+            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(WeekId));
+            if ((WeekType == null)) {
+                throw new global::System.ArgumentNullException("WeekType");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(WeekType));
+            }
+            this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(Original_WeekId));
+            if ((Original_WeekType == null)) {
+                throw new global::System.ArgumentNullException("Original_WeekType");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(Original_WeekType));
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
+            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.UpdateCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.UpdateCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(int WeekId, int Original_WeekId, string Original_WeekType) {
+            return this.Update(WeekId, Original_WeekType, Original_WeekId, Original_WeekType);
+        }
+    }
+    
+    /// <summary>
     ///TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
     ///</summary>
     [global::System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4319,6 +5168,8 @@ SELECT LectureID, Surname, Name FROM Teacher WHERE (LectureID = @LectureID)";
         private SubjectTableAdapter _subjectTableAdapter;
         
         private TeacherTableAdapter _teacherTableAdapter;
+        
+        private WeekTableAdapter _weekTableAdapter;
         
         private bool _backupDataSetBeforeUpdate;
         
@@ -4407,6 +5258,20 @@ SELECT LectureID, Surname, Name FROM Teacher WHERE (LectureID = @LectureID)";
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
+            "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3" +
+            "a", "System.Drawing.Design.UITypeEditor")]
+        public WeekTableAdapter WeekTableAdapter {
+            get {
+                return this._weekTableAdapter;
+            }
+            set {
+                this._weekTableAdapter = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         public bool BackupDataSetBeforeUpdate {
             get {
                 return this._backupDataSetBeforeUpdate;
@@ -4444,6 +5309,10 @@ SELECT LectureID, Surname, Name FROM Teacher WHERE (LectureID = @LectureID)";
                             && (this._teacherTableAdapter.Connection != null))) {
                     return this._teacherTableAdapter.Connection;
                 }
+                if (((this._weekTableAdapter != null) 
+                            && (this._weekTableAdapter.Connection != null))) {
+                    return this._weekTableAdapter.Connection;
+                }
                 return null;
             }
             set {
@@ -4470,6 +5339,9 @@ SELECT LectureID, Surname, Name FROM Teacher WHERE (LectureID = @LectureID)";
                     count = (count + 1);
                 }
                 if ((this._teacherTableAdapter != null)) {
+                    count = (count + 1);
+                }
+                if ((this._weekTableAdapter != null)) {
                     count = (count + 1);
                 }
                 return count;
@@ -4507,6 +5379,15 @@ SELECT LectureID, Surname, Name FROM Teacher WHERE (LectureID = @LectureID)";
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
                     result = (result + this._teacherTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._weekTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.Week.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._weekTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -4562,6 +5443,14 @@ SELECT LectureID, Surname, Name FROM Teacher WHERE (LectureID = @LectureID)";
                     allAddedRows.AddRange(addedRows);
                 }
             }
+            if ((this._weekTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.Week.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._weekTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
             if ((this._exerciseTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.Exercise.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
@@ -4601,6 +5490,14 @@ SELECT LectureID, Surname, Name FROM Teacher WHERE (LectureID = @LectureID)";
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._exerciseTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._weekTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.Week.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._weekTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -4692,6 +5589,11 @@ SELECT LectureID, Surname, Name FROM Teacher WHERE (LectureID = @LectureID)";
                 throw new global::System.ArgumentException("Все адаптеры таблицы, управляемые диспетчером адаптера таблицы TableAdapterManage" +
                         "r, должны использовать одинаковую строку подключения.");
             }
+            if (((this._weekTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._weekTableAdapter.Connection) == false))) {
+                throw new global::System.ArgumentException("Все адаптеры таблицы, управляемые диспетчером адаптера таблицы TableAdapterManage" +
+                        "r, должны использовать одинаковую строку подключения.");
+            }
             global::System.Data.IDbConnection workConnection = this.Connection;
             if ((workConnection == null)) {
                 throw new global::System.ApplicationException("TableAdapterManager не содержит сведений о подключении. Укажите для каждого адапт" +
@@ -4767,6 +5669,15 @@ SELECT LectureID, Surname, Name FROM Teacher WHERE (LectureID = @LectureID)";
                     if (this._teacherTableAdapter.Adapter.AcceptChangesDuringUpdate) {
                         this._teacherTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
                         adaptersWithAcceptChangesDuringUpdate.Add(this._teacherTableAdapter.Adapter);
+                    }
+                }
+                if ((this._weekTableAdapter != null)) {
+                    revertConnections.Add(this._weekTableAdapter, this._weekTableAdapter.Connection);
+                    this._weekTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._weekTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
+                    if (this._weekTableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._weekTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._weekTableAdapter.Adapter);
                     }
                 }
                 // 
@@ -4846,6 +5757,10 @@ SELECT LectureID, Surname, Name FROM Teacher WHERE (LectureID = @LectureID)";
                 if ((this._teacherTableAdapter != null)) {
                     this._teacherTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._teacherTableAdapter]));
                     this._teacherTableAdapter.Transaction = null;
+                }
+                if ((this._weekTableAdapter != null)) {
+                    this._weekTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._weekTableAdapter]));
+                    this._weekTableAdapter.Transaction = null;
                 }
                 if ((0 < adaptersWithAcceptChangesDuringUpdate.Count)) {
                     global::System.Data.Common.DataAdapter[] adapters = new System.Data.Common.DataAdapter[adaptersWithAcceptChangesDuringUpdate.Count];

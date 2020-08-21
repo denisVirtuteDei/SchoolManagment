@@ -1,4 +1,4 @@
-namespace SchoolTableCursed
+namespace SchoolTableCursed.DB_Classes
 {
     using System;
     using System.Collections.Generic;
@@ -17,24 +17,33 @@ namespace SchoolTableCursed
         [StringLength(10)]
         public string AWeek { get; set; }
 
-        public int SubjNameFK { get; set; }
+        [Required]
+        [StringLength(50)]
+        public string SubjNameFK { get; set; }
 
         public int TeacherFK { get; set; }
 
         public int Class { get; set; }
 
-        public int ExNumber { get; set; }
-
         [Required]
         [StringLength(50)]
         public string ExKind { get; set; }
 
-        public int GroupFK { get; set; }
+        [Required]
+        [StringLength(10)]
+        public string GroupFK { get; set; }
+
+        public int ExNumber { get; set; }
+
+        [Column(TypeName = "date")]
+        public DateTime DayOfWeek { get; set; }
 
         public virtual Groups Groups { get; set; }
 
         public virtual Subject Subject { get; set; }
 
         public virtual Teacher Teacher { get; set; }
+
+        public virtual Week Week { get; set; }
     }
 }

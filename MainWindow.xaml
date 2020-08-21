@@ -5,135 +5,167 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SchoolTableCursed"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded">
+        Title="MainWindow" MinHeight="500" MinWidth="800" Loaded="Window_Loaded" >
+
+
     <Window.Resources>
         <local:SubjTableDataSet x:Key="subjTableDataSet"/>
         <CollectionViewSource x:Key="exerciseViewSource" Source="{Binding Exercise, Source={StaticResource subjTableDataSet}}"/>
+        <CollectionViewSource x:Key="subjectViewSource" Source="{Binding Subject, Source={StaticResource subjTableDataSet}}"/>
+        <CollectionViewSource x:Key="groupsViewSource" Source="{Binding Groups, Source={StaticResource subjTableDataSet}}"/>
+        <CollectionViewSource x:Key="teacherViewSource" Source="{Binding Teacher, Source={StaticResource subjTableDataSet}}"/>
+        <CollectionViewSource x:Key="weekViewSource" Source="{Binding Week, Source={StaticResource subjTableDataSet}}"/>
     </Window.Resources>
+
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <!--Авторизация-->
-        <StackPanel Grid.Row="0" Margin="0,10,15,0" Orientation="Horizontal" HorizontalAlignment="Right">
+        <StackPanel Grid.Row="0" Margin="10" Orientation="Horizontal" HorizontalAlignment="Right">
+
             <TextBlock FontFamily="georgia" FontSize="14"> 
                 <Hyperlink Click="LogInLink_Click">Log in</Hyperlink>
             </TextBlock>
+
+        </StackPanel>
+
+        <!--Selection-->
+        <StackPanel Grid.Row="0" Margin="10" Orientation="Horizontal" HorizontalAlignment="Left">
+            <TabControl x:Name="Selection" >
+
+                <!-- Searching -->
+                <TabItem x:Name="searchTab" FontFamily="georgia" FontSize="14" Header="Поиск">
+
+                    <!--ContentTab-->
+                    <TabItem.Content>
+                        <Grid >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!--First part-->
+                            <StackPanel Grid.Column="0" Orientation="Vertical" Margin="5" Width="200">
+                                
+                                <!--Subject place-->
+                                <TextBlock Margin="5,5,5,0" Text="Предмет" FontFamily="georgia"/>
+                                <ComboBox Height="20" Margin="5,2,5,5" FontFamily="georgia" DisplayMemberPath="SubjName">
+                                    <ComboBox.ItemsSource>
+                                        
+                                        <CompositeCollection>
+                                            <TextBox IsEnabled="False"/>
+                                            <CollectionContainer Collection="{Binding Source={StaticResource subjectViewSource}}" />
+                                        </CompositeCollection>
+                                        
+                                    </ComboBox.ItemsSource>
+                                </ComboBox>
+                                
+                                <!--Teacher place-->
+                                <TextBlock Margin="5,5,5,0" Text="Преподаватель" FontFamily="georgia"/>
+                                <ComboBox Height="20" Margin="5,2,5,5" FontFamily="georgia" DisplayMemberPath="Surname">
+                                    <ComboBox.ItemsSource>
+                                        
+                                        <CompositeCollection>
+                                            <TextBox IsEnabled="False"/>
+                                            <CollectionContainer Collection="{Binding Source={StaticResource teacherViewSource}}" />
+                                        </CompositeCollection>
+                                        
+                                    </ComboBox.ItemsSource>
+                                </ComboBox>
+
+                                <!--Groupe place-->
+                                <TextBlock Margin="5,5,5,0" Text="Группа" FontFamily="georgia"/>
+                                <ComboBox Height="20" Margin="5,2,5,5" FontFamily="georgia" DisplayMemberPath="GroupName">
+                                    <ComboBox.ItemsSource>
+
+                                        <CompositeCollection>
+                                            <TextBox IsEnabled="False"/>
+                                            <CollectionContainer Collection="{Binding Source={StaticResource groupsViewSource}}" />
+                                        </CompositeCollection>
+
+                                    </ComboBox.ItemsSource>
+                                </ComboBox>
+
+                            </StackPanel>
+
+                            <!--Second part-->
+                            <StackPanel Grid.Column="1" Orientation="Vertical" Margin="5" Width="140">
+
+                                <!--Classes place-->
+                                <TextBlock Margin="5,5,5,0" Text="Кабинет" FontFamily="georgia"/>
+                                <ComboBox Height="20" Margin="5,2,5,5" FontFamily="georgia" DisplayMemberPath="Class" >
+                                    <ComboBox.ItemsSource>
+
+                                        <CompositeCollection>
+                                            <TextBox IsEnabled="False"/>
+                                            <CollectionContainer Collection="{Binding}" />
+                                        </CompositeCollection>
+
+                                    </ComboBox.ItemsSource>
+                                </ComboBox>
+
+                                <!--Subject type place-->
+                                <TextBlock Margin="5,5,5,0" Text="Вид занятия" FontFamily="georgia"/>
+                                <ComboBox Height="20" Margin="5,2,5,5" FontFamily="georgia" DisplayMemberPath="ExKind">
+                                    <ComboBox.ItemsSource>
+
+                                        <CompositeCollection>
+                                            <TextBox IsEnabled="False"/>
+                                            <CollectionContainer Collection="{Binding}" />
+                                        </CompositeCollection>
+
+                                    </ComboBox.ItemsSource>
+                                </ComboBox>
+
+                                <!--A week place-->
+                                <TextBlock Margin="5,5,5,0" Text="Неделя" FontFamily="georgia"/>
+                                <ComboBox Height="20" Margin="5,2,5,5" FontFamily="georgia" DisplayMemberPath="WeekType">
+                                    <ComboBox.ItemsSource>
+
+                                        <CompositeCollection>
+                                            <TextBox IsEnabled="False"/>
+                                            <CollectionContainer Collection="{Binding Source={StaticResource weekViewSource}}" />
+                                        </CompositeCollection>
+
+                                    </ComboBox.ItemsSource>
+                                </ComboBox>
+
+                            </StackPanel>
+
+                            <!--Third(Calendar) part-->
+                            <Viewbox Grid.Column="2" MinWidth="300" MinHeight="250" Margin="40,0,0,0">
+                                <Calendar DisplayDateStart="09/01/2020" DisplayDateEnd="12/24/2020"/>
+                            </Viewbox>
+
+                        </Grid>
+
+                    </TabItem.Content>
+
+                </TabItem>
+
+            </TabControl>
         </StackPanel>
 
         <!--MainPart-->
-        <StackPanel Grid.Row="1" x:Name="OutputView">
+        <StackPanel Grid.Row="1" x:Name="OutputView" DataContext="{StaticResource exerciseViewSource}"
+                    Margin="10">
 
-            <Grid DataContext="{StaticResource exerciseViewSource}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-
-                <!--Selection-->
-                <StackPanel Grid.Column="0" Orientation="Horizontal" Margin="10">
-                    <TabControl x:Name="Selection" >
-
-                        <!-- Searching -->
-                        <TabItem x:Name="searchTab" FontFamily="georgia" FontSize="14"
-                                 Header="Поиск">
-
-                            <!--ContentTab-->
-                            <TabItem.Content>
-                                <Grid >
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                    </Grid.ColumnDefinitions>
-
-                                    <StackPanel Grid.Column="0" Orientation="Vertical" Margin="5" Width="200">
-                                        <TextBlock Margin="5,5,5,0" Text="Предмет" FontFamily="georgia"/>
-                                        <ComboBox Height="20" VerticalContentAlignment="Center"
-                                              Grid.Column="0" Margin="5,2,5,5" FontFamily="georgia">
-                                        </ComboBox>
-
-                                        <TextBlock Margin="5,5,5,0" Text="Преподаватель" FontFamily="georgia"/>
-                                        <ComboBox Height="20" VerticalContentAlignment="Center"
-                                              Grid.Column="0" Margin="5,2,5,5" FontFamily="georgia">
-                                        </ComboBox>
-
-                                        <TextBlock Margin="5,5,5,0" Text="Группа" FontFamily="georgia"/>
-                                        <ComboBox Height="20" VerticalContentAlignment="Center"
-                                              Grid.Column="0" Margin="5,2,5,5" FontFamily="georgia">
-                                        </ComboBox>
-                                    </StackPanel>
-
-                                    <StackPanel Grid.Column="1" Orientation="Vertical" Margin="5" Width="140">
-
-                                        <TextBlock Margin="5,5,5,0" Text="Кабинет" FontFamily="georgia"/>
-                                        <ComboBox Height="20" VerticalContentAlignment="Center"
-                                              Grid.Column="0" Margin="5,2,5,5" FontFamily="georgia">
-                                        </ComboBox>
-
-                                        <TextBlock Margin="5,5,5,0" Text="Неделя" FontFamily="georgia"/>
-                                        <ComboBox Height="20" VerticalContentAlignment="Center"
-                                              Grid.Column="0" Margin="5,2,5,5" FontFamily="georgia">
-                                            <ComboBoxItem Content="Белая"/>
-                                            <ComboBoxItem Content="Зеленая"/>
-                                            <ComboBoxItem Content="1" />
-                                            <ComboBoxItem Content="2"/>
-                                            <ComboBoxItem Content="3"/>
-                                            <ComboBoxItem Content="4"/>
-                                            <ComboBoxItem Content="Все"/>
-                                        </ComboBox>
-
-                                        <TextBlock Margin="5,5,5,0" Text="Вид занятия" FontFamily="georgia"/>
-                                        <ComboBox Height="20" VerticalContentAlignment="Center"
-                                              Grid.Column="0" Margin="5,2,5,5" FontFamily="georgia">
-                                            <ComboBoxItem Content="Лекция"/>
-                                            <ComboBoxItem Content="Практика"/>
-                                            <ComboBoxItem Content="Лабараторная" />
-                                            <ComboBoxItem Content="Семинар"/>
-                                        </ComboBox>
-                                    </StackPanel>
-
-                                </Grid>
-
-                            </TabItem.Content>
-
-                        </TabItem>
-                        
-                    </TabControl>
-                </StackPanel>
-
-                <!--Data Base-->
-                <StackPanel Grid.Row="1" Orientation="Vertical" Margin="10">
-
-                    <DataGrid x:Name="exerciseDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}"  Grid.RowSpan="2" RowDetailsVisibilityMode="VisibleWhenSelected">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn x:Name="exIDColumn" Binding="{Binding ExID}" Header="Ex ID" Width="SizeToHeader"/>
-                            <DataGridTextColumn x:Name="aWeekColumn" Binding="{Binding AWeek}" Header="AWeek" Width="SizeToHeader"/>
-                            <DataGridTextColumn x:Name="subjNameFKColumn" Binding="{Binding SubjNameFK}" Header="Subj Name FK" Width="SizeToHeader"/>
-                            <DataGridTextColumn x:Name="teacherFKColumn" Binding="{Binding TeacherFK}" Header="Teacher FK" Width="SizeToHeader"/>
-                            <DataGridTextColumn x:Name="classColumn" Binding="{Binding Class}" Header="Class" Width="SizeToHeader"/>
-                            <DataGridTextColumn x:Name="exKindColumn" Binding="{Binding ExKind}" Header="Ex Kind" Width="SizeToHeader"/>
-                            <DataGridTextColumn x:Name="groupFKColumn" Binding="{Binding GroupFK}" Header="Group FK" Width="SizeToHeader"/>
-                            <DataGridTextColumn x:Name="exNumberColumn" Binding="{Binding ExNumber}" Header="Ex Number" Width="SizeToHeader"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
-
-                    <!--<ListView x:Name="DB" FontSize="13" SelectedItem="{Binding Selected}" SelectionMode="Single">
-                        <ListView.View>
-                            <GridView AllowsColumnReorder="False" >
-                                <GridViewColumn DisplayMemberBinding="{Binding PK_Flight}" Width="60">Flight ID</GridViewColumn>
-                                <GridViewColumn DisplayMemberBinding="{Binding FK_Route}" Width="60">Route ID</GridViewColumn>
-                                <GridViewColumn DisplayMemberBinding="{Binding DeparturePoint}" Width="120" >Departure Point</GridViewColumn>
-                                <GridViewColumn DisplayMemberBinding="{Binding ArrivalPoint}" Width="120" >Arrival Point</GridViewColumn>
-                                <GridViewColumn DisplayMemberBinding="{Binding DepartureDate}" Width="160" >Departure Date</GridViewColumn>
-                                <GridViewColumn DisplayMemberBinding="{Binding ArrivalDate}" Width="160" >Arrival Date</GridViewColumn>
-                                <GridViewColumn DisplayMemberBinding="{Binding SeatCount}" Width="70"  >Seat Count</GridViewColumn>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>-->
-                </StackPanel>
-                
-            </Grid>
+            <DataGrid x:Name="exerciseDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True"
+                      ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" GridLinesVisibility="Horizontal">
+                <DataGrid.Columns>
+                    <DataGridTextColumn x:Name="exNumberColumn" Binding="{Binding ExNumber}" Header="№" Width="40"/>
+                    <DataGridTextColumn x:Name="subjNameFKColumn" Binding="{Binding SubjNameFK}" Header="Предмет" Width="200"/>
+                    <DataGridTextColumn x:Name="teacherFKColumn" Binding="{Binding TeacherFK}" Header="Преподаватель" Width="200"/>
+                    <DataGridTextColumn x:Name="aWeekColumn" Binding="{Binding AWeek}" Header="Неделя" Width="70"/>
+                    <DataGridTextColumn x:Name="classColumn" Binding="{Binding Class}" Header="Кабинет" Width="70"/>
+                    <DataGridTextColumn x:Name="exKindColumn" Binding="{Binding ExKind}" Header="Тип занятия" Width="100"/>
+                    <DataGridTextColumn x:Name="groupFKColumn" Binding="{Binding GroupFK}" Header="Группа" Width="70"/>
+                </DataGrid.Columns>
+            </DataGrid>
 
         </StackPanel>
 

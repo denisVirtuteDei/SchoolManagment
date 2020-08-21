@@ -1,4 +1,4 @@
-namespace SchoolTableCursed
+namespace SchoolTableCursed.DB_Classes
 {
     using System;
     using System.Collections.Generic;
@@ -23,7 +23,9 @@ namespace SchoolTableCursed
 
         public int Kurs { get; set; }
 
-        public int GroupFK { get; set; }
+        [Required]
+        [StringLength(10)]
+        public string GroupFK { get; set; }
 
         public virtual Groups Groups { get; set; }
     }

@@ -6,20 +6,20 @@ namespace SchoolTableCursed.DB_Classes
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Subject")]
-    public partial class Subject
+    [Table("Week")]
+    public partial class Week
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Subject()
+        public Week()
         {
             Exercise = new HashSet<Exercise>();
         }
 
-        public int SubjID { get; set; }
+        public int WeekId { get; set; }
 
         [Key]
-        [StringLength(50)]
-        public string SubjName { get; set; }
+        [StringLength(10)]
+        public string WeekType { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Exercise> Exercise { get; set; }
