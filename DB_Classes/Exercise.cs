@@ -35,8 +35,9 @@ namespace SchoolTableCursed.DB_Classes
 
         public int ExNumber { get; set; }
 
-        [Column(TypeName = "date")]
-        public DateTime DayOfWeek { get; set; }
+        [Required]
+        [StringLength(10)]
+        public string DayOfWeek { get; set; }
 
         public virtual Groups Groups { get; set; }
 

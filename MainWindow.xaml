@@ -10,7 +10,8 @@
 
     <Window.Resources>
         <local:SubjTableDataSet x:Key="subjTableDataSet"/>
-        <CollectionViewSource x:Key="exerciseViewSource" Source="{Binding Exercise, Source={StaticResource subjTableDataSet}}"/>
+        <CollectionViewSource x:Key="exerciseViewSource" Filter="CollectionViewSource_Filter"
+                              Source="{Binding Exercise, Source={StaticResource subjTableDataSet}}"/>
         <CollectionViewSource x:Key="subjectViewSource" Source="{Binding Subject, Source={StaticResource subjTableDataSet}}"/>
         <CollectionViewSource x:Key="groupsViewSource" Source="{Binding Groups, Source={StaticResource subjTableDataSet}}"/>
         <CollectionViewSource x:Key="teacherViewSource" Source="{Binding Teacher, Source={StaticResource subjTableDataSet}}"/>
@@ -138,7 +139,8 @@
 
                             <!--Third(Calendar) part-->
                             <Viewbox Grid.Column="2" MinWidth="300" MinHeight="250" Margin="40,0,0,0">
-                                <Calendar DisplayDateStart="09/01/2020" DisplayDateEnd="12/24/2020"/>
+                                <Calendar x:Name="calendarValue" SelectedDatesChanged="calendarValue_SelectedDatesChanged"
+                                          DisplayDateStart="09/01/2020" DisplayDateEnd="12/24/2020"/>
                             </Viewbox>
 
                         </Grid>
@@ -151,22 +153,21 @@
         </StackPanel>
 
         <!--MainPart-->
-        <StackPanel Grid.Row="1" x:Name="OutputView" DataContext="{StaticResource exerciseViewSource}"
-                    Margin="10">
+        <StackPanel Grid.Row="1" x:Name="OutputView" DataContext="{StaticResource exerciseViewSource}" Margin="10">
+            <DataGrid x:Name="exerciseDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" 
+                      ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected">
 
-            <DataGrid x:Name="exerciseDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True"
-                      ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" GridLinesVisibility="Horizontal">
                 <DataGrid.Columns>
-                    <DataGridTextColumn x:Name="exNumberColumn" Binding="{Binding ExNumber}" Header="№" Width="40"/>
-                    <DataGridTextColumn x:Name="subjNameFKColumn" Binding="{Binding SubjNameFK}" Header="Предмет" Width="200"/>
-                    <DataGridTextColumn x:Name="teacherFKColumn" Binding="{Binding TeacherFK}" Header="Преподаватель" Width="200"/>
-                    <DataGridTextColumn x:Name="aWeekColumn" Binding="{Binding AWeek}" Header="Неделя" Width="70"/>
-                    <DataGridTextColumn x:Name="classColumn" Binding="{Binding Class}" Header="Кабинет" Width="70"/>
-                    <DataGridTextColumn x:Name="exKindColumn" Binding="{Binding ExKind}" Header="Тип занятия" Width="100"/>
-                    <DataGridTextColumn x:Name="groupFKColumn" Binding="{Binding GroupFK}" Header="Группа" Width="70"/>
+                    <DataGridTextColumn x:Name="exNumberColumn" Binding="{Binding ExNumber}"     Header="№" Width="SizeToHeader"/>
+                    <DataGridTextColumn x:Name="subjNameFKColumn" Binding="{Binding SubjNameFK}" Header="Предмет" Width="SizeToHeader"/>
+                    <DataGridTextColumn x:Name="teacherFKColumn" Binding="{Binding TeacherFK}"   Header="Преподаватель" Width="SizeToHeader"/>
+                    <DataGridTextColumn x:Name="aWeekColumn" Binding="{Binding AWeek}"           Header="Неделя" Width="SizeToHeader"/>
+                    <DataGridTextColumn x:Name="classColumn" Binding="{Binding Class}"           Header="Кабинет" Width="SizeToHeader"/>
+                    <DataGridTextColumn x:Name="exKindColumn" Binding="{Binding ExKind}"         Header="Тип занятия" Width="SizeToHeader"/>
+                    <DataGridTextColumn x:Name="groupFKColumn" Binding="{Binding GroupFK}"       Header="Группа" Width="SizeToHeader"/>
                 </DataGrid.Columns>
-            </DataGrid>
 
+            </DataGrid>
         </StackPanel>
 
     </Grid>
