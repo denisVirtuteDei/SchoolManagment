@@ -4,18 +4,24 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SchoolTableCursed"
+        xmlns:db_classes="clr-namespace:SchoolTableCursed.DB_Classes"
         mc:Ignorable="d"
         Title="MainWindow" MinHeight="500" MinWidth="800" Loaded="Window_Loaded" >
 
 
     <Window.Resources>
+        <!--<db_classes:Example x:Key="exampleClass"/>-->
         <local:SubjTableDataSet x:Key="subjTableDataSet"/>
-        <CollectionViewSource x:Key="exerciseViewSource" Filter="CollectionViewSource_Filter"
+        <CollectionViewSource x:Key="exerciseViewSource"
                               Source="{Binding Exercise, Source={StaticResource subjTableDataSet}}"/>
-        <CollectionViewSource x:Key="subjectViewSource" Source="{Binding Subject, Source={StaticResource subjTableDataSet}}"/>
-        <CollectionViewSource x:Key="groupsViewSource" Source="{Binding Groups, Source={StaticResource subjTableDataSet}}"/>
-        <CollectionViewSource x:Key="teacherViewSource" Source="{Binding Teacher, Source={StaticResource subjTableDataSet}}"/>
-        <CollectionViewSource x:Key="weekViewSource" Source="{Binding Week, Source={StaticResource subjTableDataSet}}"/>
+        <CollectionViewSource x:Key="subjectViewSource" 
+                              Source="{Binding Subject, Source={StaticResource subjTableDataSet}}"/>
+        <CollectionViewSource x:Key="groupsViewSource" 
+                              Source="{Binding Groups, Source={StaticResource subjTableDataSet}}"/>
+        <CollectionViewSource x:Key="teacherViewSource" 
+                              Source="{Binding Teacher, Source={StaticResource subjTableDataSet}}"/>
+        <CollectionViewSource x:Key="weekViewSource" 
+                              Source="{Binding Week, Source={StaticResource subjTableDataSet}}"/>
     </Window.Resources>
 
 
@@ -54,7 +60,8 @@
                                 
                                 <!--Subject place-->
                                 <TextBlock Margin="5,5,5,0" Text="Предмет" FontFamily="georgia"/>
-                                <ComboBox Height="20" Margin="5,2,5,5" FontFamily="georgia" DisplayMemberPath="SubjName">
+                                <ComboBox Height="20" Margin="5,2,5,5" FontFamily="georgia"
+                                          DisplayMemberPath="SubjName" DataContextChanged="SubjComboBox_DataChanged">
                                     <ComboBox.ItemsSource>
                                         
                                         <CompositeCollection>
@@ -139,7 +146,7 @@
 
                             <!--Third(Calendar) part-->
                             <Viewbox Grid.Column="2" MinWidth="300" MinHeight="250" Margin="40,0,0,0">
-                                <Calendar x:Name="calendarValue" SelectedDatesChanged="calendarValue_SelectedDatesChanged"
+                                <Calendar x:Name="calendarValue" SelectedDatesChanged="CalendarValue_SelectedDatesChanged"
                                           DisplayDateStart="09/01/2020" DisplayDateEnd="12/24/2020"/>
                             </Viewbox>
 
@@ -153,7 +160,7 @@
         </StackPanel>
 
         <!--MainPart-->
-        <StackPanel Grid.Row="1" x:Name="OutputView" DataContext="{StaticResource exerciseViewSource}" Margin="10">
+        <StackPanel Grid.Row="1" x:Name="OutputView"  Margin="10" DataContext="{StaticResource exerciseViewSource}">
             <DataGrid x:Name="exerciseDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" 
                       ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected">
 

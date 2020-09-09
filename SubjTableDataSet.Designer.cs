@@ -649,7 +649,7 @@ namespace SchoolTableCursed {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public ExerciseRow AddExerciseRow(int ExID, WeekRow parentWeekRowByFK_Exercise_Week, SubjectRow parentSubjectRowByFK_Exercise_Subject, TeacherRow parentTeacherRowByFK_Exercise_Teacher, int Class, string ExKind, GroupsRow parentGroupsRowByFK_Exercise_Groups, int ExNumber, System.DateTime DayOfWeek) {
+            public ExerciseRow AddExerciseRow(int ExID, WeekRow parentWeekRowByFK_Exercise_Week, SubjectRow parentSubjectRowByFK_Exercise_Subject, TeacherRow parentTeacherRowByFK_Exercise_Teacher, int Class, string ExKind, GroupsRow parentGroupsRowByFK_Exercise_Groups, int ExNumber, string DayOfWeek) {
                 ExerciseRow rowExerciseRow = ((ExerciseRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         ExID,
@@ -732,7 +732,7 @@ namespace SchoolTableCursed {
                 base.Columns.Add(this.columnGroupFK);
                 this.columnExNumber = new global::System.Data.DataColumn("ExNumber", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnExNumber);
-                this.columnDayOfWeek = new global::System.Data.DataColumn("DayOfWeek", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                this.columnDayOfWeek = new global::System.Data.DataColumn("DayOfWeek", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDayOfWeek);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnExID}, true));
@@ -750,6 +750,7 @@ namespace SchoolTableCursed {
                 this.columnGroupFK.MaxLength = 10;
                 this.columnExNumber.AllowDBNull = false;
                 this.columnDayOfWeek.AllowDBNull = false;
+                this.columnDayOfWeek.MaxLength = 10;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2416,9 +2417,9 @@ namespace SchoolTableCursed {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public System.DateTime DayOfWeek {
+            public string DayOfWeek {
                 get {
-                    return ((global::System.DateTime)(this[this.tableExercise.DayOfWeekColumn]));
+                    return ((string)(this[this.tableExercise.DayOfWeekColumn]));
                 }
                 set {
                     this[this.tableExercise.DayOfWeekColumn] = value;
@@ -3116,7 +3117,7 @@ namespace SchoolTableCursed.SubjTableDataSetTableAdapters {
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ExKind", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ExKind", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_GroupFK", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "GroupFK", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ExNumber", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ExNumber", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DayOfWeek", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DayOfWeek", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DayOfWeek", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DayOfWeek", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
             this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[Exercise] ([ExID], [AWeek], [SubjNameFK], [TeacherFK], [Class], [ExKind], [GroupFK], [ExNumber], [DayOfWeek]) VALUES (@ExID, @AWeek, @SubjNameFK, @TeacherFK, @Class, @ExKind, @GroupFK, @ExNumber, @DayOfWeek);
@@ -3130,7 +3131,7 @@ SELECT ExID, AWeek, SubjNameFK, TeacherFK, Class, ExKind, GroupFK, ExNumber, Day
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ExKind", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ExKind", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@GroupFK", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "GroupFK", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ExNumber", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ExNumber", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DayOfWeek", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DayOfWeek", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DayOfWeek", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DayOfWeek", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
             this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[Exercise] SET [ExID] = @ExID, [AWeek] = @AWeek, [SubjNameFK] = @SubjNameFK, [TeacherFK] = @TeacherFK, [Class] = @Class, [ExKind] = @ExKind, [GroupFK] = @GroupFK, [ExNumber] = @ExNumber, [DayOfWeek] = @DayOfWeek WHERE (([ExID] = @Original_ExID) AND ([AWeek] = @Original_AWeek) AND ([SubjNameFK] = @Original_SubjNameFK) AND ([TeacherFK] = @Original_TeacherFK) AND ([Class] = @Original_Class) AND ([ExKind] = @Original_ExKind) AND ([GroupFK] = @Original_GroupFK) AND ([ExNumber] = @Original_ExNumber) AND ([DayOfWeek] = @Original_DayOfWeek));
@@ -3144,7 +3145,7 @@ SELECT ExID, AWeek, SubjNameFK, TeacherFK, Class, ExKind, GroupFK, ExNumber, Day
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ExKind", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ExKind", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@GroupFK", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "GroupFK", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ExNumber", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ExNumber", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DayOfWeek", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DayOfWeek", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DayOfWeek", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DayOfWeek", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ExID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ExID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_AWeek", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "AWeek", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SubjNameFK", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SubjNameFK", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -3153,7 +3154,7 @@ SELECT ExID, AWeek, SubjNameFK, TeacherFK, Class, ExKind, GroupFK, ExNumber, Day
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ExKind", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ExKind", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_GroupFK", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "GroupFK", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ExNumber", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ExNumber", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DayOfWeek", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DayOfWeek", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DayOfWeek", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DayOfWeek", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3231,7 +3232,7 @@ SELECT ExID, AWeek, SubjNameFK, TeacherFK, Class, ExKind, GroupFK, ExNumber, Day
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_ExID, string Original_AWeek, string Original_SubjNameFK, int Original_TeacherFK, int Original_Class, string Original_ExKind, string Original_GroupFK, int Original_ExNumber, System.DateTime Original_DayOfWeek) {
+        public virtual int Delete(int Original_ExID, string Original_AWeek, string Original_SubjNameFK, int Original_TeacherFK, int Original_Class, string Original_ExKind, string Original_GroupFK, int Original_ExNumber, string Original_DayOfWeek) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_ExID));
             if ((Original_AWeek == null)) {
                 throw new global::System.ArgumentNullException("Original_AWeek");
@@ -3260,7 +3261,12 @@ SELECT ExID, AWeek, SubjNameFK, TeacherFK, Class, ExKind, GroupFK, ExNumber, Day
                 this.Adapter.DeleteCommand.Parameters[6].Value = ((string)(Original_GroupFK));
             }
             this.Adapter.DeleteCommand.Parameters[7].Value = ((int)(Original_ExNumber));
-            this.Adapter.DeleteCommand.Parameters[8].Value = ((System.DateTime)(Original_DayOfWeek));
+            if ((Original_DayOfWeek == null)) {
+                throw new global::System.ArgumentNullException("Original_DayOfWeek");
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[8].Value = ((string)(Original_DayOfWeek));
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -3281,7 +3287,7 @@ SELECT ExID, AWeek, SubjNameFK, TeacherFK, Class, ExKind, GroupFK, ExNumber, Day
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(int ExID, string AWeek, string SubjNameFK, int TeacherFK, int Class, string ExKind, string GroupFK, int ExNumber, System.DateTime DayOfWeek) {
+        public virtual int Insert(int ExID, string AWeek, string SubjNameFK, int TeacherFK, int Class, string ExKind, string GroupFK, int ExNumber, string DayOfWeek) {
             this.Adapter.InsertCommand.Parameters[0].Value = ((int)(ExID));
             if ((AWeek == null)) {
                 throw new global::System.ArgumentNullException("AWeek");
@@ -3310,7 +3316,12 @@ SELECT ExID, AWeek, SubjNameFK, TeacherFK, Class, ExKind, GroupFK, ExNumber, Day
                 this.Adapter.InsertCommand.Parameters[6].Value = ((string)(GroupFK));
             }
             this.Adapter.InsertCommand.Parameters[7].Value = ((int)(ExNumber));
-            this.Adapter.InsertCommand.Parameters[8].Value = ((System.DateTime)(DayOfWeek));
+            if ((DayOfWeek == null)) {
+                throw new global::System.ArgumentNullException("DayOfWeek");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[8].Value = ((string)(DayOfWeek));
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -3340,7 +3351,7 @@ SELECT ExID, AWeek, SubjNameFK, TeacherFK, Class, ExKind, GroupFK, ExNumber, Day
                     string ExKind, 
                     string GroupFK, 
                     int ExNumber, 
-                    System.DateTime DayOfWeek, 
+                    string DayOfWeek, 
                     int Original_ExID, 
                     string Original_AWeek, 
                     string Original_SubjNameFK, 
@@ -3349,7 +3360,7 @@ SELECT ExID, AWeek, SubjNameFK, TeacherFK, Class, ExKind, GroupFK, ExNumber, Day
                     string Original_ExKind, 
                     string Original_GroupFK, 
                     int Original_ExNumber, 
-                    System.DateTime Original_DayOfWeek) {
+                    string Original_DayOfWeek) {
             this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(ExID));
             if ((AWeek == null)) {
                 throw new global::System.ArgumentNullException("AWeek");
@@ -3378,7 +3389,12 @@ SELECT ExID, AWeek, SubjNameFK, TeacherFK, Class, ExKind, GroupFK, ExNumber, Day
                 this.Adapter.UpdateCommand.Parameters[6].Value = ((string)(GroupFK));
             }
             this.Adapter.UpdateCommand.Parameters[7].Value = ((int)(ExNumber));
-            this.Adapter.UpdateCommand.Parameters[8].Value = ((System.DateTime)(DayOfWeek));
+            if ((DayOfWeek == null)) {
+                throw new global::System.ArgumentNullException("DayOfWeek");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((string)(DayOfWeek));
+            }
             this.Adapter.UpdateCommand.Parameters[9].Value = ((int)(Original_ExID));
             if ((Original_AWeek == null)) {
                 throw new global::System.ArgumentNullException("Original_AWeek");
@@ -3407,7 +3423,12 @@ SELECT ExID, AWeek, SubjNameFK, TeacherFK, Class, ExKind, GroupFK, ExNumber, Day
                 this.Adapter.UpdateCommand.Parameters[15].Value = ((string)(Original_GroupFK));
             }
             this.Adapter.UpdateCommand.Parameters[16].Value = ((int)(Original_ExNumber));
-            this.Adapter.UpdateCommand.Parameters[17].Value = ((System.DateTime)(Original_DayOfWeek));
+            if ((Original_DayOfWeek == null)) {
+                throw new global::System.ArgumentNullException("Original_DayOfWeek");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[17].Value = ((string)(Original_DayOfWeek));
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -3436,7 +3457,7 @@ SELECT ExID, AWeek, SubjNameFK, TeacherFK, Class, ExKind, GroupFK, ExNumber, Day
                     string ExKind, 
                     string GroupFK, 
                     int ExNumber, 
-                    System.DateTime DayOfWeek, 
+                    string DayOfWeek, 
                     int Original_ExID, 
                     string Original_AWeek, 
                     string Original_SubjNameFK, 
@@ -3445,7 +3466,7 @@ SELECT ExID, AWeek, SubjNameFK, TeacherFK, Class, ExKind, GroupFK, ExNumber, Day
                     string Original_ExKind, 
                     string Original_GroupFK, 
                     int Original_ExNumber, 
-                    System.DateTime Original_DayOfWeek) {
+                    string Original_DayOfWeek) {
             return this.Update(Original_ExID, AWeek, SubjNameFK, TeacherFK, Class, ExKind, GroupFK, ExNumber, DayOfWeek, Original_ExID, Original_AWeek, Original_SubjNameFK, Original_TeacherFK, Original_Class, Original_ExKind, Original_GroupFK, Original_ExNumber, Original_DayOfWeek);
         }
     }
