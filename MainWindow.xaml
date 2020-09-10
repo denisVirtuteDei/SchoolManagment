@@ -60,8 +60,8 @@
                                 
                                 <!--Subject place-->
                                 <TextBlock Margin="5,5,5,0" Text="Предмет" FontFamily="georgia"/>
-                                <ComboBox Height="20" Margin="5,2,5,5" FontFamily="georgia"
-                                          DisplayMemberPath="SubjName" DataContextChanged="SubjComboBox_DataChanged">
+                                <ComboBox x:Name="subjCB" Height="20" Margin="5,2,5,5" FontFamily="georgia" 
+                                          DisplayMemberPath="SubjName" SelectionChanged="SubjCB_SelectionChanged">
                                     <ComboBox.ItemsSource>
                                         
                                         <CompositeCollection>
@@ -74,7 +74,7 @@
                                 
                                 <!--Teacher place-->
                                 <TextBlock Margin="5,5,5,0" Text="Преподаватель" FontFamily="georgia"/>
-                                <ComboBox Height="20" Margin="5,2,5,5" FontFamily="georgia" DisplayMemberPath="Surname">
+                                <ComboBox x:Name="teacherCB" Height="20" Margin="5,2,5,5" FontFamily="georgia" DisplayMemberPath="Surname">
                                     <ComboBox.ItemsSource>
                                         
                                         <CompositeCollection>
@@ -87,7 +87,7 @@
 
                                 <!--Groupe place-->
                                 <TextBlock Margin="5,5,5,0" Text="Группа" FontFamily="georgia"/>
-                                <ComboBox Height="20" Margin="5,2,5,5" FontFamily="georgia" DisplayMemberPath="GroupName">
+                                <ComboBox x:Name="groupCB" Height="20" Margin="5,2,5,5" FontFamily="georgia" DisplayMemberPath="GroupName">
                                     <ComboBox.ItemsSource>
 
                                         <CompositeCollection>
@@ -105,7 +105,7 @@
 
                                 <!--Classes place-->
                                 <TextBlock Margin="5,5,5,0" Text="Кабинет" FontFamily="georgia"/>
-                                <ComboBox Height="20" Margin="5,2,5,5" FontFamily="georgia" DisplayMemberPath="Class" >
+                                <ComboBox x:Name="classCB" Height="20" Margin="5,2,5,5" FontFamily="georgia" DisplayMemberPath="Class" >
                                     <ComboBox.ItemsSource>
 
                                         <CompositeCollection>
@@ -118,7 +118,7 @@
 
                                 <!--Subject type place-->
                                 <TextBlock Margin="5,5,5,0" Text="Вид занятия" FontFamily="georgia"/>
-                                <ComboBox Height="20" Margin="5,2,5,5" FontFamily="georgia" DisplayMemberPath="ExKind">
+                                <ComboBox x:Name="kindCB" Height="20" Margin="5,2,5,5" FontFamily="georgia" DisplayMemberPath="ExKind">
                                     <ComboBox.ItemsSource>
 
                                         <CompositeCollection>
@@ -131,7 +131,7 @@
 
                                 <!--A week place-->
                                 <TextBlock Margin="5,5,5,0" Text="Неделя" FontFamily="georgia"/>
-                                <ComboBox Height="20" Margin="5,2,5,5" FontFamily="georgia" DisplayMemberPath="WeekType">
+                                <ComboBox x:Name="weekCB" Height="20" Margin="5,2,5,5" FontFamily="georgia" DisplayMemberPath="WeekType">
                                     <ComboBox.ItemsSource>
 
                                         <CompositeCollection>

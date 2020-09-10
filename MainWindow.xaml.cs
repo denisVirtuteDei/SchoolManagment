@@ -24,10 +24,13 @@ namespace SchoolTableCursed
     /// </summary>
     public partial class MainWindow : Window
     {
-        private SchoolTableContext schoolContext;
+        private SubjTableDataSetTableAdapters.ExerciseTableAdapter subjTableDataSetExerciseTableAdapter;
         private CollectionViewSource schoolTableViewSource;
-        private bool subjCB = false, teacherCB = false,
-                     groupCB = false;
+
+        private SchoolTableContext schoolContext;
+
+        //private bool subjCB = false, teacherCB = false,
+        //             groupCB = false;
 
 
         public MainWindow()
@@ -46,16 +49,30 @@ namespace SchoolTableCursed
         {
             SubjTableDataSet subjTableDataSet = ((SubjTableDataSet)(this.FindResource("subjTableDataSet")));
 
+            #region ExerciseViewSource
+
             // Загрузить данные в таблицу Exercise. Можно изменить этот код как требуется.
 
+            subjTableDataSetExerciseTableAdapter = new SubjTableDataSetTableAdapters.ExerciseTableAdapter();
             //subjTableDataSetExerciseTableAdapter.Fill(subjTableDataSet.Exercise);
-            //System.Windows.Data.CollectionViewSource exerciseViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("exerciseViewSource")));
-            SubjTableDataSetTableAdapters.ExerciseTableAdapter subjTableDataSetExerciseTableAdapter = new SubjTableDataSetTableAdapters.ExerciseTableAdapter();
+
             ObservableCollection<Exercise> query = new ObservableCollection<Exercise>(schoolContext.Exercise);
+
+            //System.Windows.Data.CollectionViewSource exerciseViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("exerciseViewSource")));
             schoolTableViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("exerciseViewSource")));
+
             schoolTableViewSource.Source = query;
-            schoolTableViewSource.Filter += CollectionViewSource_Filter;
+            schoolTableViewSource.Filter += CollectionViewSource_Calendar_Filter;
+            schoolTableViewSource.Filter += CollectionViewSource_Subj_Filter;
+            //schoolTableViewSource.Filter += CollectionViewSource_Teacher_Filter;
+            //schoolTableViewSource.Filter += CollectionViewSource_Group_Filter;
+            //schoolTableViewSource.Filter += CollectionViewSource_Class_Filter;
+            //schoolTableViewSource.Filter += CollectionViewSource_Kind_Filter;
+            //schoolTableViewSource.Filter += CollectionViewSource_Week_Filter;
             //exerciseViewSource.View.MoveCurrentToFirst();
+
+            #endregion
+
 
             // Загрузить данные в таблицу Subject. Можно изменить этот код как требуется.
             SchoolTableCursed.SubjTableDataSetTableAdapters.SubjectTableAdapter subjTableDataSetSubjectTableAdapter = new SchoolTableCursed.SubjTableDataSetTableAdapters.SubjectTableAdapter();
@@ -82,70 +99,152 @@ namespace SchoolTableCursed
             weekViewSource.View.MoveCurrentToFirst();
         }
 
+        private string TimeCast(DateTime date)
+        {
+            var dateTime = date.DayOfWeek;
+            string _date;
+            switch (dateTime)
+            {
+                case (DayOfWeek)1:
+                    _date = "пн";
+                    break;
+
+                case (DayOfWeek)2:
+                    _date = "вт";
+                    break;
+
+                case (DayOfWeek)3:
+                    _date = "ср";
+                    break;
+
+                case (DayOfWeek)4:
+                    _date = "чт";
+                    break;
+
+                case (DayOfWeek)5:
+                    _date = "пт";
+                    break;
+
+                case (DayOfWeek)6:
+                    _date = "сб";
+                    break;
+
+                case (DayOfWeek)7:
+                    _date = "вс";
+                    break;
+
+                default:
+                    _date = "";
+                    break;
+            }
+
+            return _date;
+        }
+
+
+
+        #region DataChangesEvents
         private void CalendarValue_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
         {
             CollectionViewSource.GetDefaultView(exerciseDataGrid.ItemsSource).Refresh();
         }
 
-        private void CollectionViewSource_Filter(object sender, FilterEventArgs e)
+        private void SubjCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            schoolTableViewSource.View.Refresh();
+            //CollectionViewSource.GetDefaultView(exerciseDataGrid.ItemsSource).Refresh();
+        }
+
+        #endregion
+
+        #region CollectionFilteringFunctions
+        private void CollectionViewSource_Calendar_Filter(object sender, FilterEventArgs e)
         {
             // If filter is turned on, filter completed items.
             if (e.Item is Exercise t)
             {
-                string day = TimeCast(calendarValue.SelectedDate.GetValueOrDefault().DayOfWeek);
+                string day = TimeCast(calendarValue.SelectedDate ?? DateTime.Today);
 
                 if (t.DayOfWeek.Equals(day))
-                    e.Accepted = false;
-                else
                     e.Accepted = true;
+                else
+                    e.Accepted = false;
             }
         }
 
-        private string TimeCast(DayOfWeek dateTime)
+        private void CollectionViewSource_Subj_Filter(object sender, FilterEventArgs e)
         {
-            string date;
-            switch (dateTime)
+            // If filter is turned on, filter completed items.
+            if (e.Item is Exercise t)
             {
-                case (DayOfWeek)1:
-                    date = "пн";
-                    break;
+                string subj = subjCB.Text;
 
-                case (DayOfWeek)2:
-                    date = "вт";
-                    break;
-
-                case (DayOfWeek)3:
-                    date = "ср";
-                    break;
-
-                case (DayOfWeek)4:
-                    date = "чт";
-                    break;
-
-                case (DayOfWeek)5:
-                    date = "пт";
-                    break;
-
-                case (DayOfWeek)6:
-                    date = "сб";
-                    break;
-
-                case (DayOfWeek)7:
-                    date = "вс";
-                    break;
-
-                default:
-                    date = "";
-                    break;
+                if (!t.SubjNameFK.Equals(subj) && !string.IsNullOrEmpty(subj))
+                    e.Accepted = false;
             }
-
-            return date;
         }
 
-        private void SubjComboBox_DataChanged(object sender, DependencyPropertyChangedEventArgs e)
+        private void CollectionViewSource_Teacher_Filter(object sender, FilterEventArgs e)
         {
-            CollectionViewSource.GetDefaultView(exerciseDataGrid.ItemsSource).Refresh();
+            // If filter is turned on, filter completed items.
+            if (e.Item is Exercise t)
+            {
+                string teacher = teacherCB.Text;
+
+                if (!t.TeacherFK.Equals(teacher) || !string.IsNullOrEmpty(teacher))
+                    e.Accepted = false;
+            }
         }
+
+        private void CollectionViewSource_Group_Filter(object sender, FilterEventArgs e)
+        {
+            // If filter is turned on, filter completed items.
+            if (e.Item is Exercise t)
+            {
+                string group = groupCB.Text;
+
+                if (!t.TeacherFK.Equals(group) || !string.IsNullOrEmpty(group))
+                    e.Accepted = false;
+            }
+        }
+
+        private void CollectionViewSource_Class_Filter(object sender, FilterEventArgs e)
+        {
+            // If filter is turned on, filter completed items.
+            if (e.Item is Exercise t)
+            {
+                string cabinet = classCB.Text;
+
+                if (!t.TeacherFK.Equals(cabinet) || !string.IsNullOrEmpty(cabinet))
+                    e.Accepted = false;
+            }
+        }
+
+        private void CollectionViewSource_Kind_Filter(object sender, FilterEventArgs e)
+        {
+            // If filter is turned on, filter completed items.
+            if (e.Item is Exercise t)
+            {
+                string kind = kindCB.Text;
+
+                if (!t.TeacherFK.Equals(kind) || !string.IsNullOrEmpty(kind))
+                    e.Accepted = false;
+            }
+        }
+
+        private void CollectionViewSource_Week_Filter(object sender, FilterEventArgs e)
+        {
+            // If filter is turned on, filter completed items.
+            if (e.Item is Exercise t)
+            {
+                string week = weekCB.Text;
+
+                if (!t.TeacherFK.Equals(week) || !string.IsNullOrEmpty(week))
+                    e.Accepted = false;
+            }
+        }
+        #endregion
+
     }
 }
 
