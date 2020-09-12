@@ -15,17 +15,11 @@ namespace SchoolTableCursed.DB_Classes
             Exercise = new HashSet<Exercise>();
         }
 
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int LectureID { get; set; }
 
-        [Required]
+        [Key]
         [StringLength(50)]
-        public string Surname { get; set; }
-
-        [Required]
-        [StringLength(50)]
-        public string Name { get; set; }
+        public string FullName { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Exercise> Exercise { get; set; }

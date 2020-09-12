@@ -61,7 +61,7 @@
                                 <!--Subject place-->
                                 <TextBlock Margin="5,5,5,0" Text="Предмет" FontFamily="georgia"/>
                                 <ComboBox x:Name="subjCB" Height="20" Margin="5,2,5,5" FontFamily="georgia" 
-                                          DisplayMemberPath="SubjName" SelectionChanged="SubjCB_SelectionChanged">
+                                          DisplayMemberPath="SubjName" SelectionChanged="CalendarValue_SelectedDatesChanged">
                                     <ComboBox.ItemsSource>
                                         
                                         <CompositeCollection>
@@ -74,7 +74,8 @@
                                 
                                 <!--Teacher place-->
                                 <TextBlock Margin="5,5,5,0" Text="Преподаватель" FontFamily="georgia"/>
-                                <ComboBox x:Name="teacherCB" Height="20" Margin="5,2,5,5" FontFamily="georgia" DisplayMemberPath="Surname">
+                                <ComboBox x:Name="teacherCB" Height="20" Margin="5,2,5,5" FontFamily="georgia"
+                                          DisplayMemberPath="FullName" SelectionChanged="CalendarValue_SelectedDatesChanged">
                                     <ComboBox.ItemsSource>
                                         
                                         <CompositeCollection>
@@ -87,7 +88,8 @@
 
                                 <!--Groupe place-->
                                 <TextBlock Margin="5,5,5,0" Text="Группа" FontFamily="georgia"/>
-                                <ComboBox x:Name="groupCB" Height="20" Margin="5,2,5,5" FontFamily="georgia" DisplayMemberPath="GroupName">
+                                <ComboBox x:Name="groupCB" Height="20" Margin="5,2,5,5" FontFamily="georgia" 
+                                          DisplayMemberPath="GroupName" SelectionChanged="CalendarValue_SelectedDatesChanged">
                                     <ComboBox.ItemsSource>
 
                                         <CompositeCollection>
@@ -105,12 +107,13 @@
 
                                 <!--Classes place-->
                                 <TextBlock Margin="5,5,5,0" Text="Кабинет" FontFamily="georgia"/>
-                                <ComboBox x:Name="classCB" Height="20" Margin="5,2,5,5" FontFamily="georgia" DisplayMemberPath="Class" >
+                                <ComboBox x:Name="classCB" Height="20" Margin="5,2,5,5" FontFamily="georgia"
+                                          DisplayMemberPath="Class" SelectionChanged="CalendarValue_SelectedDatesChanged">
                                     <ComboBox.ItemsSource>
 
                                         <CompositeCollection>
                                             <TextBox IsEnabled="False"/>
-                                            <CollectionContainer Collection="{Binding}" />
+                                            <CollectionContainer Collection="{Binding Source={StaticResource exerciseViewSource}}" />
                                         </CompositeCollection>
 
                                     </ComboBox.ItemsSource>
@@ -118,12 +121,13 @@
 
                                 <!--Subject type place-->
                                 <TextBlock Margin="5,5,5,0" Text="Вид занятия" FontFamily="georgia"/>
-                                <ComboBox x:Name="kindCB" Height="20" Margin="5,2,5,5" FontFamily="georgia" DisplayMemberPath="ExKind">
+                                <ComboBox x:Name="kindCB" Height="20" Margin="5,2,5,5" FontFamily="georgia"
+                                          DisplayMemberPath="ExKind" SelectionChanged="CalendarValue_SelectedDatesChanged">
                                     <ComboBox.ItemsSource>
 
                                         <CompositeCollection>
                                             <TextBox IsEnabled="False"/>
-                                            <CollectionContainer Collection="{Binding}" />
+                                            <CollectionContainer Collection="{Binding Source={StaticResource exerciseViewSource}}" />
                                         </CompositeCollection>
 
                                     </ComboBox.ItemsSource>
@@ -131,7 +135,8 @@
 
                                 <!--A week place-->
                                 <TextBlock Margin="5,5,5,0" Text="Неделя" FontFamily="georgia"/>
-                                <ComboBox x:Name="weekCB" Height="20" Margin="5,2,5,5" FontFamily="georgia" DisplayMemberPath="WeekType">
+                                <ComboBox x:Name="weekCB" Height="20" Margin="5,2,5,5" FontFamily="georgia" 
+                                          DisplayMemberPath="WeekType" SelectionChanged="CalendarValue_SelectedDatesChanged">
                                     <ComboBox.ItemsSource>
 
                                         <CompositeCollection>
@@ -161,7 +166,7 @@
 
         <!--MainPart-->
         <StackPanel Grid.Row="1" x:Name="OutputView"  Margin="10" DataContext="{StaticResource exerciseViewSource}">
-            <DataGrid x:Name="exerciseDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" 
+            <DataGrid x:Name="exerciseDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True"
                       ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected">
 
                 <DataGrid.Columns>
@@ -170,7 +175,7 @@
                     <DataGridTextColumn x:Name="teacherFKColumn" Binding="{Binding TeacherFK}"   Header="Преподаватель" Width="SizeToHeader"/>
                     <DataGridTextColumn x:Name="aWeekColumn" Binding="{Binding AWeek}"           Header="Неделя" Width="SizeToHeader"/>
                     <DataGridTextColumn x:Name="classColumn" Binding="{Binding Class}"           Header="Кабинет" Width="SizeToHeader"/>
-                    <DataGridTextColumn x:Name="exKindColumn" Binding="{Binding ExKind}"         Header="Тип занятия" Width="SizeToHeader"/>
+                    <DataGridTextColumn x:Name="exKindColumn" Binding="{Binding ExKind}"         Header="Вид занятия" Width="SizeToHeader"/>
                     <DataGridTextColumn x:Name="groupFKColumn" Binding="{Binding GroupFK}"       Header="Группа" Width="SizeToHeader"/>
                 </DataGrid.Columns>
 

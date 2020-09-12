@@ -21,7 +21,9 @@ namespace SchoolTableCursed.DB_Classes
         [StringLength(50)]
         public string SubjNameFK { get; set; }
 
-        public int TeacherFK { get; set; }
+        [Required]
+        [StringLength(50)]
+        public string TeacherFK { get; set; }
 
         public int Class { get; set; }
 

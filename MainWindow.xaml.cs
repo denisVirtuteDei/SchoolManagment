@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Data;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -29,13 +30,13 @@ namespace SchoolTableCursed
 
         private SchoolTableContext schoolContext;
 
-        //private bool subjCB = false, teacherCB = false,
-        //             groupCB = false;
 
 
         public MainWindow()
         {
             InitializeComponent();
+
+            
 
             schoolContext = new SchoolTableContext();
         }
@@ -64,11 +65,11 @@ namespace SchoolTableCursed
             schoolTableViewSource.Source = query;
             schoolTableViewSource.Filter += CollectionViewSource_Calendar_Filter;
             schoolTableViewSource.Filter += CollectionViewSource_Subj_Filter;
-            //schoolTableViewSource.Filter += CollectionViewSource_Teacher_Filter;
-            //schoolTableViewSource.Filter += CollectionViewSource_Group_Filter;
-            //schoolTableViewSource.Filter += CollectionViewSource_Class_Filter;
-            //schoolTableViewSource.Filter += CollectionViewSource_Kind_Filter;
-            //schoolTableViewSource.Filter += CollectionViewSource_Week_Filter;
+            schoolTableViewSource.Filter += CollectionViewSource_Teacher_Filter;
+            schoolTableViewSource.Filter += CollectionViewSource_Group_Filter;
+            schoolTableViewSource.Filter += CollectionViewSource_Class_Filter;
+            schoolTableViewSource.Filter += CollectionViewSource_Kind_Filter;
+            schoolTableViewSource.Filter += CollectionViewSource_Week_Filter;
             //exerciseViewSource.View.MoveCurrentToFirst();
 
             #endregion
@@ -149,12 +150,6 @@ namespace SchoolTableCursed
             CollectionViewSource.GetDefaultView(exerciseDataGrid.ItemsSource).Refresh();
         }
 
-        private void SubjCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            schoolTableViewSource.View.Refresh();
-            //CollectionViewSource.GetDefaultView(exerciseDataGrid.ItemsSource).Refresh();
-        }
-
         #endregion
 
         #region CollectionFilteringFunctions
@@ -177,7 +172,11 @@ namespace SchoolTableCursed
             // If filter is turned on, filter completed items.
             if (e.Item is Exercise t)
             {
-                string subj = subjCB.Text;
+                DataRowView dataRow = (subjCB.SelectedItem as DataRowView);
+                string subj = string.Empty;
+
+                if (dataRow != null)
+                    subj = dataRow["SubjName"] as string;
 
                 if (!t.SubjNameFK.Equals(subj) && !string.IsNullOrEmpty(subj))
                     e.Accepted = false;
@@ -189,9 +188,13 @@ namespace SchoolTableCursed
             // If filter is turned on, filter completed items.
             if (e.Item is Exercise t)
             {
-                string teacher = teacherCB.Text;
+                DataRowView dataRow = (teacherCB.SelectedItem as DataRowView);
+                string teacher = string.Empty;
 
-                if (!t.TeacherFK.Equals(teacher) || !string.IsNullOrEmpty(teacher))
+                if (dataRow != null)
+                    teacher = dataRow["FullName"] as string;
+
+                if (!t.TeacherFK.Equals(teacher) && !string.IsNullOrEmpty(teacher))
                     e.Accepted = false;
             }
         }
@@ -201,9 +204,13 @@ namespace SchoolTableCursed
             // If filter is turned on, filter completed items.
             if (e.Item is Exercise t)
             {
-                string group = groupCB.Text;
+                DataRowView dataRow = (groupCB.SelectedItem as DataRowView);
+                string group = string.Empty;
+                    
+                if (dataRow != null)
+                    group = dataRow["GroupName"] as string;
 
-                if (!t.TeacherFK.Equals(group) || !string.IsNullOrEmpty(group))
+                if (!t.GroupFK.Equals(group) && !string.IsNullOrEmpty(group))
                     e.Accepted = false;
             }
         }
@@ -213,9 +220,13 @@ namespace SchoolTableCursed
             // If filter is turned on, filter completed items.
             if (e.Item is Exercise t)
             {
-                string cabinet = classCB.Text;
+                DataRowView dataRow = (classCB.SelectedItem as DataRowView);
+                string cabinet = string.Empty;
 
-                if (!t.TeacherFK.Equals(cabinet) || !string.IsNullOrEmpty(cabinet))
+                if (dataRow != null)
+                    cabinet = dataRow["Class"] as string;
+
+                if (!t.Class.Equals(cabinet) && !string.IsNullOrEmpty(cabinet))
                     e.Accepted = false;
             }
         }
@@ -225,9 +236,13 @@ namespace SchoolTableCursed
             // If filter is turned on, filter completed items.
             if (e.Item is Exercise t)
             {
-                string kind = kindCB.Text;
+                DataRowView dataRow = (kindCB.SelectedItem as DataRowView);
+                string kind = string.Empty;
 
-                if (!t.TeacherFK.Equals(kind) || !string.IsNullOrEmpty(kind))
+                if (dataRow != null)
+                    kind = dataRow["ExKind"] as string;
+
+                if (!t.ExKind.Equals(kind) && !string.IsNullOrEmpty(kind))
                     e.Accepted = false;
             }
         }
@@ -237,9 +252,13 @@ namespace SchoolTableCursed
             // If filter is turned on, filter completed items.
             if (e.Item is Exercise t)
             {
-                string week = weekCB.Text;
+                DataRowView dataRow = (weekCB.SelectedItem as DataRowView);
+                string week = string.Empty;
 
-                if (!t.TeacherFK.Equals(week) || !string.IsNullOrEmpty(week))
+                if (dataRow != null)
+                    week = dataRow["WeekType"] as string;
+
+                if (!t.AWeek.Equals(week) && !string.IsNullOrEmpty(week))
                     e.Accepted = false;
             }
         }
@@ -252,7 +271,6 @@ namespace SchoolTableCursed
 
 /*
  TODO
- Фильтрация по Combobox'ам
- Кнопку LogIn
- Посмотреть Генератор записей для бд     
+ вид занятия && кабинет combobox
+ Кнопку LogIn    
  */

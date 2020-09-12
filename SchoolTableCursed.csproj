@@ -82,6 +82,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DB_Classes\Exercise.cs" />
+    <Compile Include="DB_Classes\Groups.cs" />
+    <Compile Include="DB_Classes\SchoolTableContext.cs" />
+    <Compile Include="DB_Classes\Student.cs" />
+    <Compile Include="DB_Classes\Subject.cs" />
+    <Compile Include="DB_Classes\Teacher.cs" />
+    <Compile Include="DB_Classes\Week.cs" />
     <Compile Include="SubjTableDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -95,13 +102,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DB_Classes\Exercise.cs" />
-    <Compile Include="DB_Classes\Groups.cs" />
-    <Compile Include="DB_Classes\SchoolTableContext.cs" />
-    <Compile Include="DB_Classes\Student.cs" />
-    <Compile Include="DB_Classes\Subject.cs" />
-    <Compile Include="DB_Classes\Teacher.cs" />
-    <Compile Include="DB_Classes\Week.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
