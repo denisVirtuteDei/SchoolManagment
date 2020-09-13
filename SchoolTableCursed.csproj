@@ -82,6 +82,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AdministratorWindow\AdminWindow.xaml.cs">
+      <DependentUpon>AdminWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DB_Classes\Exercise.cs" />
     <Compile Include="DB_Classes\Groups.cs" />
     <Compile Include="DB_Classes\SchoolTableContext.cs" />
@@ -89,12 +92,23 @@
     <Compile Include="DB_Classes\Subject.cs" />
     <Compile Include="DB_Classes\Teacher.cs" />
     <Compile Include="DB_Classes\Week.cs" />
+    <Compile Include="LogInDialogWindow\LogInDialog.xaml.cs">
+      <DependentUpon>LogInDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SubjTableDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SubjTableDataSet.xsd</DependentUpon>
     </Compile>
-    <Page Include="MainWindow.xaml">
+    <Page Include="AdministratorWindow\AdminWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LogInDialogWindow\LogInDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserWindow\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -102,7 +116,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="UserWindow\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>

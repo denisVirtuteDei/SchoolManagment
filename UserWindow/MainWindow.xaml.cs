@@ -1,4 +1,6 @@
-﻿using SchoolTableCursed.DB_Classes;
+﻿using SchoolTableCursed.AdministratorWindow;
+using SchoolTableCursed.DB_Classes;
+using SchoolTableCursed.LogInDialogWindow;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -18,7 +20,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SchoolTableCursed
+namespace SchoolTableCursed.UserWindow
 {
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
@@ -43,7 +45,14 @@ namespace SchoolTableCursed
 
         private void LogInLink_Click(object sender, RoutedEventArgs e)
         {
-
+            LogInDialog wd = new LogInDialog();
+            if (wd.ShowDialog() == true)
+            {
+                AdminWindow adminW = new AdminWindow();
+                App.Current.MainWindow = adminW;
+                adminW.Show();
+                this.Close();
+            }
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

@@ -1,4 +1,4 @@
-﻿<Window x:Class="SchoolTableCursed.MainWindow"
+﻿<Window x:Class="SchoolTableCursed.UserWindow.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -30,6 +30,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+        
         <!--Авторизация-->
         <StackPanel Grid.Row="0" Margin="10" Orientation="Horizontal" HorizontalAlignment="Right">
 
@@ -164,13 +165,13 @@
             </TabControl>
         </StackPanel>
 
-        <!--MainPart-->
+        <!--Data base-->
         <StackPanel Grid.Row="1" x:Name="OutputView"  Margin="10" DataContext="{StaticResource exerciseViewSource}">
             <DataGrid x:Name="exerciseDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True"
                       ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected">
 
                 <DataGrid.Columns>
-                    <DataGridTextColumn x:Name="exNumberColumn" Binding="{Binding ExNumber}"     Header="№" Width="SizeToHeader"/>
+                    <DataGridTextColumn x:Name="exNumberColumn" Binding="{Binding ExNumber}"     Header="№ пары" Width="SizeToHeader"/>
                     <DataGridTextColumn x:Name="subjNameFKColumn" Binding="{Binding SubjNameFK}" Header="Предмет" Width="SizeToHeader"/>
                     <DataGridTextColumn x:Name="teacherFKColumn" Binding="{Binding TeacherFK}"   Header="Преподаватель" Width="SizeToHeader"/>
                     <DataGridTextColumn x:Name="aWeekColumn" Binding="{Binding AWeek}"           Header="Неделя" Width="SizeToHeader"/>
