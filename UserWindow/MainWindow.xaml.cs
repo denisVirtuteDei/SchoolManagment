@@ -37,10 +37,8 @@ namespace SchoolTableCursed.UserWindow
         public MainWindow()
         {
             InitializeComponent();
-
-            
-
             schoolContext = new SchoolTableContext();
+
         }
 
         private void LogInLink_Click(object sender, RoutedEventArgs e)
@@ -158,7 +156,6 @@ namespace SchoolTableCursed.UserWindow
         {
             CollectionViewSource.GetDefaultView(exerciseDataGrid.ItemsSource).Refresh();
         }
-
         #endregion
 
         #region CollectionFilteringFunctions

@@ -85,6 +85,19 @@
     <Compile Include="AdministratorWindow\AdminWindow.xaml.cs">
       <DependentUpon>AdminWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AdministratorWindow\Pages\ExercisePage.xaml.cs">
+      <DependentUpon>ExercisePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AdministratorWindow\Pages\GroupPage.xaml.cs">
+      <DependentUpon>GroupPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AdministratorWindow\Pages\SubjectPage.xaml.cs">
+      <DependentUpon>SubjectPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AdministratorWindow\Pages\TeacherPage.xaml.cs">
+      <DependentUpon>TeacherPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AdministratorWindow\TabNavigator.cs" />
     <Compile Include="DB_Classes\Exercise.cs" />
     <Compile Include="DB_Classes\Groups.cs" />
     <Compile Include="DB_Classes\SchoolTableContext.cs" />
@@ -104,6 +117,22 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="AdministratorWindow\Pages\ExercisePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AdministratorWindow\Pages\GroupPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AdministratorWindow\Pages\SubjectPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AdministratorWindow\Pages\TeacherPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="LogInDialogWindow\LogInDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -116,6 +145,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="UserWindow\DistinctConverter.cs" />
     <Compile Include="UserWindow\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

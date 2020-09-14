@@ -1,0 +1,92 @@
+﻿<Page
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:SchoolTableCursed.AdministratorWindow.Pages"
+      xmlns:SchoolTableCursed="clr-namespace:SchoolTableCursed" x:Class="SchoolTableCursed.AdministratorWindow.Pages.ExercisePage"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ExercisePage" Loaded="Page_Loaded" >
+
+    <Page.Resources>
+        <SchoolTableCursed:SubjTableDataSet x:Key="subjTableDataSet"/>
+        <CollectionViewSource x:Key="weekViewSource" 
+                              Source="{Binding Week, Source={StaticResource subjTableDataSet}}"/>
+        <CollectionViewSource x:Key="teacherViewSource" 
+                              Source="{Binding Teacher, Source={StaticResource subjTableDataSet}}"/>
+    </Page.Resources>
+
+    <Grid TextElement.FontFamily="georgia" TextElement.FontSize="14">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="0" Orientation="Vertical" Margin="5" >
+            <TextBlock Margin="5,5,5,0" Text="Номер пары" FontSize="14"/>
+            <ComboBox x:Name="SubjNumberComboBox" Margin="5,0,5,5" Width="80">
+                <ComboBoxItem Tag="s1" Content="1"/>
+                <ComboBoxItem Tag="s2" Content="2"/>
+                <ComboBoxItem Tag="s3" Content="3"/>
+                <ComboBoxItem Tag="s4" Content="4"/>
+                <ComboBoxItem Tag="s4" Content="5"/>
+                <ComboBoxItem Tag="s4" Content="6"/>
+            </ComboBox>
+
+            <TextBlock Margin="5,5,5,0" Text="Неделя" FontSize="14"/>
+            <ComboBox x:Name="AWeekComboBox" Margin="5,0,5,5" Width="80" DisplayMemberPath="WeekType">
+                <ComboBox.ItemsSource>
+
+                    <CompositeCollection>
+                        <CollectionContainer Collection="{Binding Source={StaticResource weekViewSource}}" />
+                    </CompositeCollection>
+
+                </ComboBox.ItemsSource>
+            </ComboBox>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" Orientation="Vertical" Margin="5">
+            <TextBlock Margin="5,5,5,0" Text="Кабинет" FontSize="14"/>
+            <TextBox x:Name="CabinetBox" Margin="5,0,5,5" Width="80"/>
+
+            <TextBlock Margin="5,10,5,0" Text="День недели" FontSize="14"/>
+            <TextBox x:Name="DayOfWeekBox" Margin="5,0,5,5" Width="80" MaxLength="2"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="2" Orientation="Vertical" Margin="5">
+            <TextBlock Margin="5,5,5,0" Text="Название предмета" FontSize="14"/>
+            <TextBox x:Name="SubjNameBox" Margin="5,0,5,5" Width="200"/>
+
+            <TextBlock Margin="5,10,5,0" Text="Вид занятия" FontSize="14"/>
+            <ComboBox x:Name="KindComboBox" Margin="5,0,5,5" Width="200">
+                <ComboBoxItem Tag="f1" Content="лекция"/>
+                <ComboBoxItem Tag="f2" Content="практика"/>
+                <ComboBoxItem Tag="f3" Content="семинар"/>
+                <ComboBoxItem Tag="f4" Content="лабораторная"/>
+            </ComboBox>
+
+            
+        </StackPanel>
+
+        <StackPanel Grid.Column="3" Orientation="Vertical" Margin="5">
+            <TextBlock Margin="5,5,5,0" Text="Преподаватель" FontSize="14"/>
+            <ComboBox x:Name="TeacherFullNameComboBox" Margin="5,0,5,5" Width="200" DisplayMemberPath="FullName">
+                <ComboBox.ItemsSource>
+
+                    <CompositeCollection>
+                        <CollectionContainer Collection="{Binding Source={StaticResource teacherViewSource}}" />
+                    </CompositeCollection>
+
+                </ComboBox.ItemsSource>
+            </ComboBox>
+                     
+
+            <Button x:Name="ExerciseAddButton" FontFamily="Segoe UI Symbol" Content="&#xE081;" Margin="5,10,5,0" FontSize="22"
+                    VerticalAlignment="Bottom" HorizontalAlignment="Right" Click="AddButton_Click"/>
+        </StackPanel>
+
+    </Grid>
+</Page>

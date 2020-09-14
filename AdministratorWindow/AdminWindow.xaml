@@ -4,18 +4,23 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SchoolTableCursed.AdministratorWindow"
-        xmlns:SchoolTableCursed="clr-namespace:SchoolTableCursed" x:Class="SchoolTableCursed.AdministratorWindow.AdminWindow"
+        xmlns:SchoolTableCursed="clr-namespace:SchoolTableCursed" 
+        x:Class="SchoolTableCursed.AdministratorWindow.AdminWindow"
         mc:Ignorable="d"
         Title="AdminWindow" Height="450" Width="800" Loaded="Window_Loaded">
 
 
     <Window.Resources>
         <SchoolTableCursed:SubjTableDataSet x:Key="subjTableDataSet"/>
+        <local:TabNavigator x:Key="navigator"/>
         <CollectionViewSource x:Key="exerciseViewSource" 
                               Source="{Binding Exercise, Source={StaticResource subjTableDataSet}}"/>
-        <CollectionViewSource x:Key="groupsViewSource" Source="{Binding Groups, Source={StaticResource subjTableDataSet}}"/>
-        <CollectionViewSource x:Key="subjectViewSource" Source="{Binding Subject, Source={StaticResource subjTableDataSet}}"/>
-        <CollectionViewSource x:Key="teacherViewSource" Source="{Binding Teacher, Source={StaticResource subjTableDataSet}}"/>
+        <CollectionViewSource x:Key="groupsViewSource" 
+                              Source="{Binding Groups, Source={StaticResource subjTableDataSet}}"/>
+        <CollectionViewSource x:Key="subjectViewSource" 
+                              Source="{Binding Subject, Source={StaticResource subjTableDataSet}}"/>
+        <CollectionViewSource x:Key="teacherViewSource" 
+                              Source="{Binding Teacher, Source={StaticResource subjTableDataSet}}"/>
     </Window.Resources>
 
 
@@ -48,151 +53,18 @@
 
                         <!--Adding-->
                         <TabItem x:Name="AddTab" Selector.Selected="AddTab_Selected">
-
                             <!--Header-->
                             <TabItem.Header>
                                 <TextBlock Text="&#xE109;" FontSize="24"/>
                             </TabItem.Header>
-
-                            <!--ContentTab -->
-                            <TabItem.Content>
-                               
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                        </Grid.ColumnDefinitions>
-                                    <!--<GroupBox x:Name="b1">
-                                        <StackPanel Grid.Column="0" Orientation="Vertical" Margin="5" >
-                                            <TextBlock Margin="5,5,5,0" Text="FlightID" FontSize="9"/>
-                                            <TextBox x:Name="pk" Margin="5,0,5,5" Width="80" IsReadOnly="True"/>
-
-                                            <TextBlock Margin="5,5,5,0" Text="RouteID" FontSize="9"/>
-                                            <ComboBox x:Name="fk" Margin="5,0,5,5" Width="80" />
-
-                                            <TextBlock Margin="5,5,5,0" Text="SeatCount" FontSize="9"/>
-                                            <TextBox x:Name="seats" Margin="5,0,5,5" Width="80"/>
-                                        </StackPanel>
-
-                                        <StackPanel Grid.Column="1" Orientation="Vertical" Margin="5">
-                                            <TextBlock Margin="5,5,5,0" Text="Departure point" FontSize="9"/>
-                                            <ComboBox x:Name="depPoint" Margin="5,0,5,5" Width="200"/>
-
-                                            <TextBlock Margin="5,5,5,0" Text="Arrival point" FontSize="9"/>
-                                            <ComboBox x:Name="depDate" Margin="5,0,5,5" Width="200"/>
-                                        </StackPanel>
-
-                                        <StackPanel Grid.Column="2" Orientation="Vertical" Margin="5">
-                                            <TextBlock Margin="5,5,5,0" Text="Departure date" FontSize="9"/>
-                                            <ComboBox x:Name="arrPoint" Margin="5,0,5,5" Width="200"/>
-
-                                            <TextBlock Margin="5,5,5,0" Text="Arrival date" FontSize="9"/>
-                                            <ComboBox x:Name="arrDate" Margin="5,0,5,5" Width="200"/>
-
-                                            <Button x:Name="AddButton" Content="&#xE081;" Margin="10" FontSize="24"
-                                                VerticalAlignment="Bottom" HorizontalAlignment="Right" Click="AddButton_Click"/>
-                                        </StackPanel>
-                                    </GroupBox>-->
-
-                                </Grid>
-
-                                <!--<GroupBox x:Name="b2">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                        </Grid.ColumnDefinitions>
-
-                                        <StackPanel Grid.Column="0" Orientation="Vertical" Margin="5" >
-                                            <TextBlock Margin="5,5,5,0" Text="FlightID" FontSize="9"/>
-                                            <TextBox x:Name="pk" Margin="5,0,5,5" Width="80" IsReadOnly="True"/>
-
-                                            <TextBlock Margin="5,5,5,0" Text="RouteID" FontSize="9"/>
-                                            <ComboBox x:Name="fk" Margin="5,0,5,5" Width="80" />
-
-                                            <TextBlock Margin="5,5,5,0" Text="SeatCount" FontSize="9"/>
-                                            <TextBox x:Name="seats" Margin="5,0,5,5" Width="80"/>
-                                        </StackPanel>
-
-                                        <StackPanel Grid.Column="1" Orientation="Vertical" Margin="5">
-                                            <TextBlock Margin="5,5,5,0" Text="Departure point" FontSize="9"/>
-                                            <ComboBox x:Name="depPoint" Margin="5,0,5,5" Width="200"/>
-
-                                            <TextBlock Margin="5,5,5,0" Text="Arrival point" FontSize="9"/>
-                                            <ComboBox x:Name="depDate" Margin="5,0,5,5" Width="200"/>
-                                        </StackPanel>
-
-                                        <StackPanel Grid.Column="2" Orientation="Vertical" Margin="5">
-                                            <TextBlock Margin="5,5,5,0" Text="Departure date" FontSize="9"/>
-                                            <ComboBox x:Name="arrPoint" Margin="5,0,5,5" Width="200"/>
-
-                                            <TextBlock Margin="5,5,5,0" Text="Arrival date" FontSize="9"/>
-                                            <ComboBox x:Name="arrDate" Margin="5,0,5,5" Width="200"/>
-
-                                            <Button x:Name="AddButton" Content="&#xE081;" Margin="10" FontSize="24"
-                                                VerticalAlignment="Bottom" HorizontalAlignment="Right" Click="AddButton_Click"/>
-                                        </StackPanel>
-
-                                    </Grid>
-                                </GroupBox>-->
-
-                            </TabItem.Content>
-
                         </TabItem>
 
                         <!--Reorder-->
-                        <TabItem x:Name="EditTab" Selector.Selected="EditTab_Selected">
-
+                        <TabItem x:Name="EditTab" Selector.Selected="EditTab_Selected" IsEnabled="False">
                             <!--Header-->
                             <TabItem.Header>
                                 <TextBlock Text="&#xE104;" FontSize="24"/>
                             </TabItem.Header>
-
-                            <!--ContentTab -->
-                            <TabItem.Content>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                    </Grid.ColumnDefinitions>
-
-                                    <StackPanel Grid.Column="0" Orientation="Vertical" Margin="5">
-                                        <TextBlock Margin="5,5,5,0" Text="FlightID" FontSize="9"/>
-                                        <TextBox x:Name="pk_edit" Margin="5,0,5,5" Width="80"/>
-
-                                        <TextBlock Margin="5,5,5,0" Text="RouteID" FontSize="9"/>
-                                        <ComboBox x:Name="fk_edit" Margin="5,0,5,5" Width="80"/>
-
-                                        <TextBlock Margin="5,5,5,0" Text="SeatCount" FontSize="9"/>
-                                        <TextBox x:Name="seats_edit" Margin="5,0,5,5" Width="80"/>
-                                    </StackPanel>
-
-                                    <StackPanel Grid.Column="1" Orientation="Vertical" Margin="5">
-                                        <TextBlock Margin="5,5,5,0" Text="Departure point" FontSize="9"/>
-                                        <TextBox x:Name="depPoint_edit" Margin="5,0,5,5" Width="200"/>
-
-                                        <TextBlock Margin="5,5,5,0" Text="Arrival point" FontSize="9"/>
-                                        <TextBox x:Name="depDate_edit" Margin="5,0,5,5" Width="200"/>
-                                    </StackPanel>
-
-                                    <StackPanel Grid.Column="2" Orientation="Vertical" Margin="5">
-                                        <TextBlock Margin="5,5,5,0" Text="Departure date" FontSize="9"/>
-                                        <TextBox x:Name="arrPoint_edit" Margin="5,0,5,5" Width="200"/>
-
-                                        <TextBlock Margin="5,5,5,0" Text="Arrival date" FontSize="9"/>
-                                        <TextBox x:Name="arrDate_edit" Margin="5,0,5,5" Width="200"/>
-
-                                        <Button x:Name="EditButton" Content="&#xE081;" Margin="10" FontSize="24"
-                                                VerticalAlignment="Bottom" HorizontalAlignment="Right" Click="EditButton_Click"/>
-                                    </StackPanel>
-
-                                </Grid>
-
-                            </TabItem.Content>
-
                         </TabItem>
 
                     </TabControl>
@@ -213,25 +85,25 @@
 
                 <!--Data Base-->
                 <StackPanel Grid.Row="1" Orientation="Vertical" Margin="10" >
-                    <TabControl x:Name="DBList" SelectionChanged="DBList_SelectionChanged">
+                    <TabControl x:Name="DB" SelectionChanged="DB_SelectionChanged">
 
                         <!--Exercises data base-->
                         <TabItem x:Name="ExerciseTab" FontFamily="georgia" FontSize="14" Header="Exercises" 
-                                 DataContext="{StaticResource exerciseViewSource}">
+                                 DataContext="{StaticResource exerciseViewSource}" Selector.Selected="ExerciseTab_Selected">
                             <TabItem.Content>
                                 <DataGrid x:Name="exerciseDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True"
                                           ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected"
-                                          IsReadOnly="True" SelectionMode="Single">
+                                          IsReadOnly="True" SelectionMode="Single" SelectionChanged="exerciseDataGrid_SelectionChanged">
 
-                                    <DataGrid.Columns >
-                                        <DataGridTextColumn x:Name="exNumberColumn" Binding="{Binding ExNumber}"     Header="№ пары" Width="SizeToHeader"/>
-                                        <DataGridTextColumn x:Name="subjNameFKColumn" Binding="{Binding SubjNameFK}" Header="Предмет" Width="SizeToHeader"/>
-                                        <DataGridTextColumn x:Name="teacherFKColumn" Binding="{Binding TeacherFK}"   Header="Преподаватель" Width="SizeToHeader"/>
-                                        <DataGridTextColumn x:Name="aWeekColumn" Binding="{Binding AWeek}"           Header="Неделя" Width="SizeToHeader"/>
-                                        <DataGridTextColumn x:Name="classColumn" Binding="{Binding Class}"           Header="Кабинет" Width="SizeToHeader"/>
-                                        <DataGridTextColumn x:Name="exKindColumn" Binding="{Binding ExKind}"         Header="Вид занятия" Width="SizeToHeader"/>
-                                        <DataGridTextColumn x:Name="groupFKColumn" Binding="{Binding GroupFK}"       Header="Группа" Width="SizeToHeader"/>
-                                        <DataGridTextColumn x:Name="dayOfWeekColumn" Binding="{Binding DayOfWeek}"   Header="День недели" Width="SizeToHeader"/>
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn x:Name="exNumberColumn" Binding="{Binding ExNumber, UpdateSourceTrigger=PropertyChanged}"     Header="№ пары" Width="SizeToHeader"/>
+                                        <DataGridTextColumn x:Name="subjNameFKColumn" Binding="{Binding SubjNameFK, UpdateSourceTrigger=PropertyChanged}" Header="Предмет" Width="SizeToHeader"/>
+                                        <DataGridTextColumn x:Name="teacherFKColumn" Binding="{Binding TeacherFK, UpdateSourceTrigger=PropertyChanged}"   Header="Преподаватель" Width="SizeToHeader"/>
+                                        <DataGridTextColumn x:Name="aWeekColumn" Binding="{Binding AWeek, UpdateSourceTrigger=PropertyChanged}"           Header="Неделя" Width="SizeToHeader"/>
+                                        <DataGridTextColumn x:Name="classColumn" Binding="{Binding Class, UpdateSourceTrigger=PropertyChanged}"           Header="Кабинет" Width="SizeToHeader"/>
+                                        <DataGridTextColumn x:Name="exKindColumn" Binding="{Binding ExKind, UpdateSourceTrigger=PropertyChanged}"         Header="Вид занятия" Width="SizeToHeader"/>
+                                        <DataGridTextColumn x:Name="groupFKColumn" Binding="{Binding GroupFK, UpdateSourceTrigger=PropertyChanged}"       Header="Группа" Width="SizeToHeader"/>
+                                        <DataGridTextColumn x:Name="dayOfWeekColumn" Binding="{Binding DayOfWeek, UpdateSourceTrigger=PropertyChanged}"   Header="День недели" Width="SizeToHeader"/>
                                     </DataGrid.Columns>
 
                                 </DataGrid>
@@ -240,11 +112,11 @@
 
                         <!--Group data base-->
                         <TabItem x:Name="GroupTab" FontFamily="georgia" FontSize="14" Header="Groups"
-                                 DataContext="{StaticResource groupsViewSource}">
+                                 DataContext="{StaticResource groupsViewSource}" Selector.Selected="GroupTab_Selected">
                             <TabItem.Content>
                                 <DataGrid x:Name="groupDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True"
                                           ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected"
-                                          IsReadOnly="True" SelectionMode="Single">
+                                          IsReadOnly="True" SelectionMode="Single" SelectionChanged="groupDataGrid_SelectionChanged">
 
                                     <DataGrid.Columns>
                                         <DataGridTextColumn x:Name="groupColumn" Binding="{Binding GroupName}" Header="Название группы" Width="SizeToHeader"/>
@@ -256,7 +128,7 @@
 
                         <!--Subject data base-->
                         <TabItem x:Name="SubjectTab" FontFamily="georgia" FontSize="14" Header="Subjects"
-                                 DataContext="{StaticResource subjectViewSource}">
+                                 DataContext="{StaticResource subjectViewSource}" Selector.Selected="SubjectTab_Selected">
                             <TabItem.Content>
                                 <DataGrid x:Name="subjectDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True"
                                           ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" 
@@ -272,7 +144,7 @@
 
                         <!--Teacher data base-->
                         <TabItem x:Name="TeacherTab" FontFamily="georgia" FontSize="14" Header="Teachers"
-                                 DataContext="{StaticResource teacherViewSource}">
+                                 DataContext="{StaticResource teacherViewSource}" Selector.Selected="TeacherTab_Selected">
                             <TabItem.Content>
                                 <DataGrid x:Name="teacherDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True"
                                           ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected"
